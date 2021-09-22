@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="BLOG">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="BLOG">
+<meta property="og:locale">
+<meta property="article:author" content="lanying">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">BLOG</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="example.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main">
+  
+    <article id="post-npm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/08/26/npm/" class="article-date">
+  <time datetime="2021-08-26T12:38:03.000Z" itemprop="datePublished">2021-08-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/26/npm/">npm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#npm-install-ban-ben-hao">npm install 版本号</a></li>
+<li><a href="#qie-huan-node-ban-ben">切换 Node 版本</a><ul>
+<li><a href="#n">n</a><ul>
+<li><a href="#an-zhuang-zhi-ding-ban-ben-node">安装指定版本 node</a></li>
+</ul>
+</li>
+<li><a href="#nvm">nvm</a></li>
+<li><a href="#guan-li-node-ban-ben-xuan-ze-nvm-huan-shi-n">管理 node 版本，选择 nvm 还是 n？</a></li>
+</ul>
+</li>
+<li><a href="#cha-kan-dang-qian-xiang-mu-de-suo-you-npm-jiao-ben-ming-ling">查看当前项目的所有 npm 脚本命令</a></li>
+<li><a href="#gou-zi">钩子</a></li>
+<li><a href="#zhi-xing-shun-xu">执行顺序</a></li>
+<li><a href="#npm-qie-huan-ban-ben">npm 切换版本</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#npm-install-ban-ben-hao" class="header-anchor">#</a><span id="npm-install-ban-ben-hao">npm install 版本号</span></h1><p><code>^15.2.1</code> match <code>^15.x.x</code></p>
+<p><code>~15.2.1</code> match <code>^15.2.x</code></p>
+<p><code>^0.2.1</code> match <code>^0.2.x</code></p>
+<p>从左边非 0 版本号开始</p>
+<h1><a href="#qie-huan-node-ban-ben" class="header-anchor">#</a><span id="qie-huan-node-ban-ben">切换 Node 版本</span></h1><h2><a href="#n" class="header-anchor">#</a><span id="n">n</span></h2><p>n 是一个 npm 包，n 依赖于 node 环境<br>安装 n<br><code>sudo npm install n -g</code></p>
+<h3><a href="#an-zhuang-zhi-ding-ban-ben-node" class="header-anchor">#</a><span id="an-zhuang-zhi-ding-ban-ben-node">安装指定版本 node</span></h3><p>安装稳定版<br><code>sudo n stable</code></p>
+<p>安装最新版<br><code>sudo n latest</code></p>
+<p>安装指定版本<br><code>sudo n 10.16.3</code></p>
+<p>选择版本或升降级<br><code>sudo n 版本号</code></p>
+<p>删除某个版本<br><code>sudo n rm 12.15.3</code></p>
+<p>以指定的版本来执行脚本<br><code>n use 10.13.0 test.js</code></p>
+<p>查看帮助命令<br><code>n help</code></p>
+<h2><a href="#nvm" class="header-anchor">#</a><span id="nvm">nvm</span></h2><p>nvm 是一个独立软件，不依赖于 node 环境。如果不会频繁切换 node 版本，还是推荐 n，所以此处不再赘述</p>
+<h2><a href="#guan-li-node-ban-ben-xuan-ze-nvm-huan-shi-n" class="header-anchor">#</a><span id="guan-li-node-ban-ben-xuan-ze-nvm-huan-shi-n">管理 node 版本，选择 nvm 还是 n？</span></h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shengulong/p/9343172.html">管理 node 版本，选择 nvm 还是 n？</a></p>
+<h1><a href="#cha-kan-dang-qian-xiang-mu-de-suo-you-npm-jiao-ben-ming-ling" class="header-anchor">#</a><span id="cha-kan-dang-qian-xiang-mu-de-suo-you-npm-jiao-ben-ming-ling">查看当前项目的所有 npm 脚本命令</span></h1><p><code>npm run</code></p>
+<p>npm 脚本就是 Shell 脚本，因为可以使用 Shell 通配符</p>
+<h1><a href="#gou-zi" class="header-anchor">#</a><span id="gou-zi">钩子</span></h1><p>npm 脚本有 pre 和 post 两个钩子。举例来说，build 脚本命令的钩子就是 prebuild 和 postbuild</p>
+<p>执行 <code>npm run build</code> 时即执行 <code>npm run prebuild &amp;&amp; npm run build &amp;&amp; npm run postbuild</code></p>
+<h1><a href="#zhi-xing-shun-xu" class="header-anchor">#</a><span id="zhi-xing-shun-xu">执行顺序</span></h1><ul>
+<li>并行 &amp;</li>
+<li>串行 &amp;&amp;</li>
+</ul>
+<h1><a href="#npm-qie-huan-ban-ben" class="header-anchor">#</a><span id="npm-qie-huan-ban-ben">npm 切换版本</span></h1><p><code>npm install -g npm@版本号</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/08/26/npm/" data-id="cktl8wg1a000o0z0cd3pccd6h" class="article-share-link" data-share="baidu" data-title="npm">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/08/26/npm/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/" rel="tag">npm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Vue" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/08/26/Vue/" class="article-date">
+  <time datetime="2021-08-26T11:40:09.000Z" itemprop="datePublished">2021-08-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/26/Vue/">Vue</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#fu-gai-zu-jian-ku-ivew-yang-shi">覆盖组件库 ivew 样式</a></li>
+<li><a href="#vue-cha-jian">vue 插件</a></li>
+<li><a href="#yang-shi-fu-gai-vue-de-scoped-he-deep">样式覆盖、Vue 的 scoped 和 /deep/</a></li>
+<li><a href="#te-xing">特性</a></li>
+<li><a href="#vue-zhong-yi-bu-chuan-props-diu-shi-shu-ju">Vue 中异步传 props 丢失数据</a></li>
+<li><a href="#yin-ru-vue-min-js-shi-vue-devtools-hui-shi-xiao">引入 vue.min.js 时 vue-devtools 会失效</a></li>
+<li><a href="#vue-router-history-mode">Vue router history mode</a></li>
+<li><a href="#vuex">vuex</a></li>
+<li><a href="#nexttick">nextTick</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#fu-gai-zu-jian-ku-ivew-yang-shi" class="header-anchor">#</a><span id="fu-gai-zu-jian-ku-ivew-yang-shi">覆盖组件库 ivew 样式</span></h1><p>main.js 中。 <strong><em>跟 CSS 文件的引用次序有关</em></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;view-design/dist/styles/iview.css&quot;</span>;</span><br><span class="line"><span class="comment">// 定制主题色</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./assets/customTheme/index.less&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#vue-cha-jian" class="header-anchor">#</a><span id="vue-cha-jian">vue 插件</span></h1><p><a target="_blank" rel="noopener" href="https://github.com/vuejs/awesome-vue">https://github.com/vuejs/awesome-vue</a></p>
+<h1><a href="#yang-shi-fu-gai-vue-de-scoped-he-deep" class="header-anchor">#</a><span id="yang-shi-fu-gai-vue-de-scoped-he-deep">样式覆盖、Vue 的 scoped 和 /deep/</span></h1><img src="/2021/08/26/Vue/Vue%E7%9A%84scoped%E5%92%8Cdeep.png" class width="1000" height="1000" title="image desc">
+
+<h1><a href="#te-xing" class="header-anchor">#</a><span id="te-xing">特性</span></h1><img src="/2021/08/26/Vue/VueFeature.png" class width="1000" height="1000">
+
+<h1><a href="#vue-zhong-yi-bu-chuan-props-diu-shi-shu-ju" class="header-anchor">#</a><span id="vue-zhong-yi-bu-chuan-props-diu-shi-shu-ju">Vue 中异步传 props 丢失数据</span></h1><ul>
+<li>子组件加上 v-if, 如</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Child</span> <span class="attr">v-if</span>=<span class="string">&quot;task.taskType === 21&quot;</span> <span class="attr">:taskDetail</span>=<span class="string">&quot;task&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>子组件中使用 watch</li>
+</ul>
+<h1><a href="#yin-ru-vue-min-js-shi-vue-devtools-hui-shi-xiao" class="header-anchor">#</a><span id="yin-ru-vue-min-js-shi-vue-devtools-hui-shi-xiao">引入 vue.min.js 时 vue-devtools 会失效</span></h1><h1><a href="#vue-router-history-mode" class="header-anchor">#</a><span id="vue-router-history-mode">Vue router history mode</span></h1><p>需要服务端支持，只需要服务端在遇到任何路由都返回 index.html 即可（前端为单页应用的话）</p>
+<h1><a href="#vuex" class="header-anchor">#</a><span id="vuex">vuex</span></h1><p>默认情况下，模块内部的 action、mutation 和 getter 是注册在全局命名空间的——这样使得多个模块能够对同一 mutation 或 action 作出响应</p>
+<h1><a href="#nexttick" class="header-anchor">#</a><span id="nexttick">nextTick</span></h1><p>值更新， 值对应的 dom 未更新， 此时你想基于<code>更新后的 dom</code>执行 A 函数，需将 A 函数放于 nextTick 内</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;channel-manage&quot;&gt;</span><br><span class="line">    channel-manage</span><br><span class="line">    &lt;div id&#x3D;&quot;next-tick-html&quot;&gt;&#123;&#123; &quot;showDelModal: &quot; &#125;&#125;&#123;&#123; showDelModal &#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang&#x3D;&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Vue, Component, Prop, Watch &#125; from &quot;vue-property-decorator&quot;;</span><br><span class="line">import &#123; State, Getter, Action &#125; from &quot;vuex-class&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; required even empty</span><br><span class="line">@Component(&#123;&#125;)</span><br><span class="line">export default class ChannelList extends Vue &#123;</span><br><span class="line">  showDelModal &#x3D; false;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; life hook</span><br><span class="line">  created() &#123;</span><br><span class="line">    this.showDelModal &#x3D; true;</span><br><span class="line"></span><br><span class="line">    console.log(&quot;no-next-tick-value&quot;, this.showDelModal);</span><br><span class="line">    console.log(&quot;no-next-tick-dom&quot;, document.getElementById(&quot;next-tick-html&quot;));</span><br><span class="line">    this.$nextTick(() &#x3D;&gt; &#123;</span><br><span class="line">      console.log(&quot;next-tick-value&quot;, this.showDelModal);</span><br><span class="line">      console.log(&quot;next-tick-dom&quot;, document.getElementById(&quot;next-tick-html&quot;));</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/08/26/Vue/" data-id="cktl8wg0n00040z0cb1g08eq1" class="article-share-link" data-share="baidu" data-title="Vue">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/08/26/Vue/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/08/26/css/" class="article-date">
+  <time datetime="2021-08-26T11:29:26.000Z" itemprop="datePublished">2021-08-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/26/css/">css</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#js-css-gong-xiang-bian-liang">js css 共享变量</a></li>
+<li><a href="#css-luo-ji-shu-xing">CSS 逻辑属性</a><ul>
+<li><a href="#inline-he-block">-inline 和 -block</a></li>
+<li><a href="#inline-size-he-block-size">inline-size 和 block-size</a></li>
+<li><a href="#position">Position</a></li>
+</ul>
+</li>
+<li><a href="#shu-xie-fang-xiang">书写方向</a></li>
+<li><a href="#css-feng-ge">CSS 风格</a><ul>
+<li><a href="#smacss">SMACSS</a></li>
+<li><a href="#css-module">CSS module</a></li>
+<li><a href="#styled-components">styled-components</a></li>
+</ul>
+</li>
+<li><a href="#postcss">PostCss</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#js-css-gong-xiang-bian-liang" class="header-anchor">#</a><span id="js-css-gong-xiang-bian-liang">js css 共享变量</span></h1><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000018795983?utm_source=tag-newest">https://segmentfault.com/a/1190000018795983?utm_source=tag-newest</a><br><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/sass-resources-loader">https://www.npmjs.com/package/sass-resources-loader</a></p>
+<h1><a href="#css-luo-ji-shu-xing" class="header-anchor">#</a><span id="css-luo-ji-shu-xing">CSS 逻辑属性</span></h1><h2><a href="#inline-he-block" class="header-anchor">#</a><span id="inline-he-block">-inline 和 -block</span></h2><p>margin/padding/border-inline/block</p>
+<p><code>-inline</code> -left 加 -right，跟书写方向有关，<code>margin-inline: 5px 10px</code>, 从左到有 margin-left 为 5px，右到左为 10px</p>
+<p><code>-block</code> -top 加 bottom，其余同上</p>
+<p>eg <code> border-block: 8px solid blue;</code></p>
+<h2><a href="#inline-size-he-block-size" class="header-anchor">#</a><span id="inline-size-he-block-size">inline-size 和 block-size</span></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">width	inline-size</span><br><span class="line">max-width	max-inline-size</span><br><span class="line">min-width	min-inline-size</span><br><span class="line">height	block-size</span><br><span class="line">max-height	max-block-size</span><br><span class="line">min-height	min-block-size</span><br></pre></td></tr></table></figure>
+
+<h2><a href="#position" class="header-anchor">#</a><span id="position">Position</span></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">top	inset-block-start</span><br><span class="line">bottom	inset-block-end</span><br><span class="line">left	inset-inline-start</span><br><span class="line">right	inset-inline-end</span><br><span class="line">top and bottom	inset-block</span><br><span class="line">left and right	inset-inline</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#shu-xie-fang-xiang" class="header-anchor">#</a><span id="shu-xie-fang-xiang">书写方向</span></h1><p>CSS</p>
+<p><code>writing-mode: horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr</code></p>
+<p>HTML</p>
+<p>尽量使用 HTML 属性以防 CSS 无法加载</p>
+<p><code>&lt;html dir=&quot;rtl&quot;&gt;</code></p>
+<h1><a href="#css-feng-ge" class="header-anchor">#</a><span id="css-feng-ge">CSS 风格</span></h1><h2><a href="#smacss" class="header-anchor">#</a><span id="smacss">SMACSS</span></h2><p><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?url=https://smacss.com/">SMACSS</a></p>
+<ul>
+<li>Base</li>
+<li>Layout</li>
+<li>Module</li>
+<li>State</li>
+<li>Theme</li>
+</ul>
+<h2><a href="#css-module" class="header-anchor">#</a><span id="css-module">CSS module</span></h2><p>以 webpack 为例，使用 css-loader 就可以实现 CSS module</p>
+<h2><a href="#styled-components" class="header-anchor">#</a><span id="styled-components">styled-components</span></h2><p>样式组件，all-in-js 的理念，不好阅读</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">&quot;styled-components&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">&quot;./style.less&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Wrapper = styled(div)<span class="string">`</span></span><br><span class="line"><span class="string">  border: 1px dashed <span class="subst">$&#123;(props) =&gt; props.color&#125;</span>;</span></span><br><span class="line"><span class="string">  width: 100%;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Header = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123;<span class="comment">/* 直接看 jsx，看不出来 Wrapper 的原始标签是 div */</span>&#125;</span><br><span class="line">      &lt;Wrapper color=<span class="string">&quot;#000&quot;</span>&gt;使用 styled-component &lt;/Wrapper&gt;</span><br><span class="line">      &lt;div className=&#123;styles.Wrapper&#125;&gt;使用 CSS Modules&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#postcss" class="header-anchor">#</a><span id="postcss">PostCss</span></h1><p>转译、兼容前缀</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/08/26/css/" data-id="cktl8wg0s00090z0c6dto7bfx" class="article-share-link" data-share="baidu" data-title="css">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/08/26/css/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-一主机多子域名多应用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/08/26/%E4%B8%80%E4%B8%BB%E6%9C%BA%E5%A4%9A%E5%AD%90%E5%9F%9F%E5%90%8D%E5%A4%9A%E5%BA%94%E7%94%A8/" class="article-date">
+  <time datetime="2021-08-26T11:14:13.000Z" itemprop="datePublished">2021-08-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/26/%E4%B8%80%E4%B8%BB%E6%9C%BA%E5%A4%9A%E5%AD%90%E5%9F%9F%E5%90%8D%E5%A4%9A%E5%BA%94%E7%94%A8/">一主机多子域名多应用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#shi-yong-nginx-shi-xian-yi-ge-zhu-ji-bu-shu-duo-yu-ming-zhi-xiang-bu-tong-docker-xiang-mu">使用 nginx 实现一个主机部署多域名指向不同 docker 项目</a></li>
+<li><a href="#docker-pei-zhi-nginx-zhi-chi-duo-ge-zi-yu-ming-dui-ying-bu-tong-de-xiang-mu-mu-lu">docker 配置 nginx 支持多个子域名对应不同的项目目录</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h2><a href="#shi-yong-nginx-shi-xian-yi-ge-zhu-ji-bu-shu-duo-yu-ming-zhi-xiang-bu-tong-docker-xiang-mu" class="header-anchor">#</a><span id="shi-yong-nginx-shi-xian-yi-ge-zhu-ji-bu-shu-duo-yu-ming-zhi-xiang-bu-tong-docker-xiang-mu">使用 nginx 实现一个主机部署多域名指向不同 docker 项目</span></h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ejiyuan/p/10316298.html">https://www.cnblogs.com/ejiyuan/p/10316298.html</a></p>
+<h2><a href="#docker-pei-zhi-nginx-zhi-chi-duo-ge-zi-yu-ming-dui-ying-bu-tong-de-xiang-mu-mu-lu" class="header-anchor">#</a><span id="docker-pei-zhi-nginx-zhi-chi-duo-ge-zi-yu-ming-dui-ying-bu-tong-de-xiang-mu-mu-lu">docker 配置 nginx 支持多个子域名对应不同的项目目录</span></h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39218464/article/details/109555147">https://blog.csdn.net/weixin_39218464/article/details/109555147</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/08/26/%E4%B8%80%E4%B8%BB%E6%9C%BA%E5%A4%9A%E5%AD%90%E5%9F%9F%E5%90%8D%E5%A4%9A%E5%BA%94%E7%94%A8/" data-id="cktl8wg1n000z0z0ccl4c2c66" class="article-share-link" data-share="baidu" data-title="一主机多子域名多应用">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/08/26/%E4%B8%80%E4%B8%BB%E6%9C%BA%E5%A4%9A%E5%AD%90%E5%9F%9F%E5%90%8D%E5%A4%9A%E5%BA%94%E7%94%A8/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4/" rel="tag">网络运维</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue-cli项目生成githook钩子" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/08/26/vue-cli%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90githook%E9%92%A9%E5%AD%90/" class="article-date">
+  <time datetime="2021-08-26T11:02:01.000Z" itemprop="datePublished">2021-08-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/26/vue-cli%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90githook%E9%92%A9%E5%AD%90/">vue-cli项目生成githook钩子</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>vue create demo</li>
+<li>删除依赖</li>
+<li><code>git init</code>, 确保生成 .git 文件夹，mac 查看隐藏文件 <code>shift+command+.</code></li>
+<li>重装依赖即可</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/08/26/vue-cli%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90githook%E9%92%A9%E5%AD%90/" data-id="cktl8wg1c000q0z0c0mm9h9en" class="article-share-link" data-share="baidu" data-title="vue-cli项目生成githook钩子">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/08/26/vue-cli%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90githook%E9%92%A9%E5%AD%90/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/githook/" rel="tag">githook</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-移动端适配多个分辨率不同的设备" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/08/26/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E5%A4%9A%E4%B8%AA%E5%88%86%E8%BE%A8%E7%8E%87%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AE%BE%E5%A4%87/" class="article-date">
+  <time datetime="2021-08-26T10:08:51.000Z" itemprop="datePublished">2021-08-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/26/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E5%A4%9A%E4%B8%AA%E5%88%86%E8%BE%A8%E7%8E%87%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AE%BE%E5%A4%87/">移动端适配多个分辨率不同的设备</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#lib-flexible">lib-flexible</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#lib-flexible" class="header-anchor">#</a><span id="lib-flexible">lib-flexible</span></h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903833697517576">https://juejin.cn/post/6844903833697517576</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/pwc1996/article/details/75738725">https://blog.csdn.net/pwc1996/article/details/75738725</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/08/26/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E5%A4%9A%E4%B8%AA%E5%88%86%E8%BE%A8%E7%8E%87%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AE%BE%E5%A4%87/" data-id="cktl8wg22001f0z0c3s7sdhnq" class="article-share-link" data-share="baidu" data-title="移动端适配多个分辨率不同的设备">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/08/26/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E5%A4%9A%E4%B8%AA%E5%88%86%E8%BE%A8%E7%8E%87%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AE%BE%E5%A4%87/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/22/js/" class="article-date">
+  <time datetime="2021-04-22T08:00:49.000Z" itemprop="datePublished">2021-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/22/js/">js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#string">String</a></li>
+<li><a href="#nan">NaN</a></li>
+<li><a href="#this">this</a></li>
+<li><a href="#arguments">arguments</a></li>
+<li><a href="#fa-bu-ding-yue">发布订阅</a></li>
+<li><a href="#array">Array</a><ul>
+<li><a href="#array-of">Array.of</a></li>
+<li><a href="#find">find</a></li>
+<li><a href="#findindex">findIndex</a></li>
+<li><a href="#fill">fill</a></li>
+<li><a href="#zhuan-cheng-yi-wei-shu-zu">转成一维数组</a></li>
+<li><a href="#pai-xu">排序</a></li>
+<li><a href="#qi-ta">其他</a></li>
+</ul>
+</li>
+<li><a href="#object">Object</a><ul>
+<li><a href="#object-is-yu">Object.is 与 ===</a></li>
+<li><a href="#qian-kao-bei">浅拷贝</a></li>
+<li><a href="#proto"><strong><em>proto</em></strong></a></li>
+<li><a href="#fan-hui-dui-xiang-zi-shen-shu-xing-fei-ji-cheng">返回对象自身属性（非继承）</a></li>
+<li><a href="#bian-li">遍历</a></li>
+<li><a href="#dong-jie">冻结</a></li>
+<li><a href="#object-values-keys-entries">Object.values/keys/entries</a></li>
+</ul>
+</li>
+<li><a href="#rest-yun-suan-fu">rest 运算符</a></li>
+<li><a href="#array-map-shi-fou-gai-bian-yuan-shu-zu">array.map 是否改变原数组</a></li>
+<li><a href="#li-ji-zhi-xing-han-shu">立即执行函数</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#string" class="header-anchor">#</a><span id="string">String</span></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串可看作数组的一种进行操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 替换</span></span><br><span class="line">replaceStr(<span class="string">&quot;.1.2.3&quot;</span>, <span class="string">&quot;.&quot;</span>, <span class="string">&quot;**&quot;</span>); <span class="comment">// &#x27;.1.2.3&#x27; → &quot;**1**2**3&quot;</span></span><br><span class="line"><span class="keyword">let</span> replaceStr = <span class="function"><span class="keyword">function</span> (<span class="params">str, before, after</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> str == <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> afterReplace = str.split(before).join(after);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;ERROR: 要替换的第一个参数不是字符串&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> afterReplace;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析 \</span></span><br><span class="line"><span class="built_in">String</span>.raw<span class="string">`Hi\n<span class="subst">$&#123;<span class="number">2</span> + <span class="number">3</span>&#125;</span>!`</span>;</span><br><span class="line"><span class="comment">// 返回 &quot;Hi\\n5!&quot;</span></span><br><span class="line"><span class="built_in">String</span>.raw<span class="string">`Hi\\n`</span>;</span><br><span class="line"><span class="comment">// 返回 &quot;Hi\\\\n&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 包含</span></span><br><span class="line"><span class="keyword">let</span> s = <span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line">s.startsWith(<span class="string">&quot;world&quot;</span>, <span class="number">6</span>); <span class="comment">// true</span></span><br><span class="line">s.endsWith(<span class="string">&quot;Hello&quot;</span>, <span class="number">5</span>); <span class="comment">// true</span></span><br><span class="line">s.includes(<span class="string">&quot;Hello&quot;</span>, <span class="number">6</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 重复</span></span><br><span class="line"><span class="string">&quot;na&quot;</span>.repeat(<span class="number">2.9</span>); <span class="comment">// &quot;nana&quot;</span></span><br><span class="line"><span class="string">&quot;x&quot;</span>.repeat(<span class="number">3</span>); <span class="comment">// &quot;xxx&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 头尾补全</span></span><br><span class="line"><span class="string">&quot;x&quot;</span>.padStart(<span class="number">5</span>, <span class="string">&quot;ab&quot;</span>); <span class="comment">// &#x27;ababx&#x27;</span></span><br><span class="line"><span class="string">&quot;x&quot;</span>.padStart(<span class="number">4</span>, <span class="string">&quot;ab&quot;</span>); <span class="comment">// &#x27;abax&#x27;</span></span><br><span class="line"><span class="string">&quot;x&quot;</span>.padEnd(<span class="number">5</span>, <span class="string">&quot;ab&quot;</span>); <span class="comment">// &#x27;xabab&#x27;</span></span><br><span class="line"><span class="string">&quot;x&quot;</span>.padEnd(<span class="number">4</span>, <span class="string">&quot;ab&quot;</span>); <span class="comment">// &#x27;xaba&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 消除空格</span></span><br><span class="line"><span class="keyword">const</span> s = <span class="string">&quot;  abc  &quot;</span>;</span><br><span class="line">s.trim(); <span class="comment">// &quot;abc&quot;</span></span><br><span class="line">s.trimStart(); <span class="comment">// &quot;abc  &quot;</span></span><br><span class="line">s.trimEnd(); <span class="comment">// &quot;  abc&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1><a href="#nan" class="header-anchor">#</a><span id="nan">NaN</span></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// NaN === NaN // false</span></span><br><span class="line"><span class="comment">// isNaN(NaN) // true</span></span><br><span class="line"><span class="comment">// 该函数接收一个参数，这个参数可以是任何类型，</span></span><br><span class="line"><span class="comment">// 如果接收的参数是数字类型，返回false;</span></span><br><span class="line"><span class="comment">// 如果是其他类型（除了数字的任何其他类型），则返回true</span></span><br><span class="line"><span class="comment">// isNaN(&#x27;xyz&#x27;) // true</span></span><br></pre></td></tr></table></figure>
+
+<h1><a href="#this" class="header-anchor">#</a><span id="this">this</span></h1><p>非箭头函数：会变动，运行时确定，可用 call() 改写后确定</p>
+<p>箭头函数：定义时确定，本身没绑定 this，取父级的 context，最近的 {} 即为父级</p>
+<h1><a href="#arguments" class="header-anchor">#</a><span id="arguments">arguments</span></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> publish = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">arguments</span>)); <span class="comment">// [object Arguments]</span></span><br><span class="line">  <span class="comment">// 将 arguments 对象转换为真正的数组</span></span><br><span class="line">  <span class="keyword">let</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">0</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">publish();</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#fa-bu-ding-yue" class="header-anchor">#</a><span id="fa-bu-ding-yue">发布订阅</span></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> PubSub = &#123;</span><br><span class="line">  subscribe: <span class="function"><span class="keyword">function</span> (<span class="params">ev, callback</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建 _callbacks 对象，除非它已经存在了</span></span><br><span class="line">    <span class="keyword">let</span> calls = <span class="built_in">this</span>._callbacks || (<span class="built_in">this</span>._callbacks = &#123;&#125;);</span><br><span class="line">    <span class="comment">// 针对给定的事件 key 创建一个数组，除非这个数组已经存在</span></span><br><span class="line">    <span class="comment">// 然后将回调函数追加到这个数组中</span></span><br><span class="line">    (<span class="built_in">this</span>._callbacks[ev] || (<span class="built_in">this</span>._callbacks[ev] = [])).push(callback);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  publish: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 将 arguments 对象转换为真正的数组</span></span><br><span class="line">    <span class="keyword">let</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 拿出第 1 个参数，即事件名称</span></span><br><span class="line">    <span class="keyword">let</span> ev = args.shift();</span><br><span class="line">    <span class="comment">// 如果不存在 _callbacks 对象，则返回</span></span><br><span class="line">    <span class="comment">// 或者如果不包含给定事件对应的数组</span></span><br><span class="line">    <span class="keyword">let</span> list, calls, i, l;</span><br><span class="line">    <span class="keyword">if</span> (!(calls = <span class="built_in">this</span>._callbacks)) <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    <span class="keyword">if</span> (!(list = <span class="built_in">this</span>._callbacks[ev])) <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    <span class="comment">// 触发回调</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>, l = list.length; i &lt; l; i++) list[i].apply(<span class="built_in">this</span>, args);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">PubSub.subscribe(<span class="string">&quot;wem&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">&quot;Wem!&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">PubSub.publish(<span class="string">&quot;wem&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#array" class="header-anchor">#</a><span id="array">Array</span></h1><h2><a href="#array-of" class="header-anchor">#</a><span id="array-of">Array.of</span></h2><p><code>Array.of()</code>基本上可以用来替代<code>Array()</code>或<code>new Array()</code>，并且不存在由于参数不同而导致的重载。它的行为非常统一</p>
+<h2><a href="#find" class="header-anchor">#</a><span id="find">find</span></h2><p>返回第一个符合条件的数组成员</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">4</span>, -<span class="number">5</span>, <span class="number">10</span>].find(<span class="function">(<span class="params">n</span>) =&gt;</span> n &lt; <span class="number">0</span>);</span><br><span class="line"><span class="comment">// -5</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#findindex" class="header-anchor">#</a><span id="findindex">findIndex</span></h2><p>返回第一个符合条件的数组成员的位置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>].findIndex(<span class="function"><span class="keyword">function</span> (<span class="params">value, index, arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value &gt; <span class="number">9</span>;</span><br><span class="line">&#125;); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#fill" class="header-anchor">#</a><span id="fill">fill</span></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>].fill(<span class="number">7</span>, <span class="number">1</span>, <span class="number">2</span>); <span class="comment">// [&#x27;a&#x27;, 7, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#zhuan-cheng-yi-wei-shu-zu" class="header-anchor">#</a><span id="zhuan-cheng-yi-wei-shu-zu">转成一维数组</span></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回一个新数组</span></span><br><span class="line"><span class="comment">// 如果不管有多少层嵌套，都要转成一维数组，可以用Infinity关键字作为参数</span></span><br><span class="line">[<span class="number">1</span>, [<span class="number">2</span>, [<span class="number">3</span>, [<span class="number">4</span>, [<span class="number">5</span>]]]]].flat(<span class="literal">Infinity</span>);</span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#pai-xu" class="header-anchor">#</a><span id="pai-xu">排序</span></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;peach&quot;</span>, <span class="string">&quot;straw&quot;</span>, <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;spork&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stableSorting = <span class="function">(<span class="params">s1, s2</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (s1[<span class="number">0</span>] &lt; s2[<span class="number">0</span>]) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">arr.sort(stableSorting);</span><br><span class="line"><span class="comment">// [&quot;apple&quot;, &quot;peach&quot;, &quot;straw&quot;, &quot;spork&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#qi-ta" class="header-anchor">#</a><span id="qi-ta">其他</span></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首操作 shift unshift</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 尾操作 pop push</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 排序 sort</span></span><br><span class="line"><span class="comment">// sort 可以接收一个比较函数来实现自定义的排序</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">11</span>, <span class="number">20</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">30</span>];</span><br><span class="line"><span class="comment">// 大到小</span></span><br><span class="line">arr.sort(<span class="function">(<span class="params">x, y</span>) =&gt;</span> y - x); <span class="comment">// &gt;&gt; Array(6) [ 30, 20, 11, 5, 3, 1 ]</span></span><br><span class="line"><span class="comment">// 小到大</span></span><br><span class="line">arr.sort(<span class="function">(<span class="params">x, y</span>) =&gt;</span> x - y); <span class="comment">// &gt;&gt; Array(6) [ 1, 3, 5, 11, 20, 30 ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 翻转 reserve</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接 concat</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> newArr = arr.concat([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line">splice(<span class="number">2</span>, <span class="number">0</span>, <span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>); <span class="comment">// 会从当前数组的位置2开始插入字符串&quot;red&quot;和&quot;green&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 切片</span></span><br><span class="line"><span class="comment">// s.slice(开始下标, 结束下标)</span></span><br><span class="line">s.slice(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">s.slice(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="comment">// 省略下标参数意思是取到底</span></span><br><span class="line">s.slice(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成</span></span><br><span class="line"><span class="comment">// 只要一个对象有length，Array.from就能把它变成一个数组，返回新的数组</span></span><br><span class="line"><span class="comment">// 对 String，Set，Map 也可以</span></span><br><span class="line"><span class="keyword">let</span> likeArr = &#123;</span><br><span class="line">  <span class="number">0</span>: <span class="string">&quot;a&quot;</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="string">&quot;b&quot;</span>,</span><br><span class="line">  <span class="number">2</span>: <span class="string">&quot;c&quot;</span>,</span><br><span class="line">  length: <span class="number">3</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成</span></span><br><span class="line"><span class="comment">// Array.of 总是返回参数值组成的数组</span></span><br><span class="line"><span class="built_in">Array</span>.of(); <span class="comment">// []</span></span><br><span class="line"><span class="built_in">Array</span>.of(<span class="literal">undefined</span>); <span class="comment">// [undefined]</span></span><br><span class="line"><span class="built_in">Array</span>.of(<span class="number">3</span>); <span class="comment">// [3]</span></span><br><span class="line"><span class="built_in">Array</span>.of(<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>); <span class="comment">// [3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 复制</span></span><br><span class="line"><span class="comment">// Array.copyWithin(target, start = 0, end = this.length)</span></span><br><span class="line"><span class="comment">// 将指定位置的数组项复制到其他位置，会覆盖原数组项，然后返回当前数组。使用该方法会修改当前数组</span></span><br><span class="line"><span class="comment">// （1）target（必需）：从该位置开始替换数据。如果为负值，表示倒数。</span></span><br><span class="line"><span class="comment">// （2）start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示倒数。</span></span><br><span class="line"><span class="comment">// （3）end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示倒数。</span></span><br><span class="line"><span class="comment">// [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;, &#x27;f&#x27;, &#x27;g&#x27;].copyWithin(0, 3) //  [&quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 填充</span></span><br><span class="line"><span class="comment">// [1,2,3,4,5].fill(&#x27;a&#x27;); // [&quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;]</span></span><br><span class="line"><span class="comment">// [1, 2, 3, 4, 5].fill(&#x27;a&#x27;, 2, 4); // [1, 2, &quot;a&quot;, &quot;a&quot;, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 序号</span></span><br><span class="line"><span class="comment">// [1, 4, -5, 10].find((n) =&gt; n &lt; 0) // -5</span></span><br><span class="line"><span class="comment">// [1, 4, -5, 10].find((n) =&gt; n &lt; -10) // undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 序号</span></span><br><span class="line"><span class="comment">// findIndex</span></span><br><span class="line"><span class="comment">// 返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回 - 1</span></span><br><span class="line"><span class="comment">// findIndex 可借助 Object.is 识别 NaN, indexOf 不可以</span></span><br><span class="line"><span class="comment">// [&#x27;a&#x27;, &#x27;b&#x27;, NaN, &#x27;c&#x27;].findIndex(y =&gt; Object.is(NaN, y)) // 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 包含</span></span><br><span class="line"><span class="comment">// includes</span></span><br><span class="line"><span class="comment">// [NaN].includes(NaN) // true</span></span><br><span class="line"><span class="comment">// [NaN].indexOf(NaN)  // -1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// map</span></span><br><span class="line"><span class="comment">// 创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果</span></span><br><span class="line"><span class="keyword">const</span> new_array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(<span class="function">(<span class="params">x</span>) =&gt;</span> x * x);</span><br><span class="line"><span class="comment">// Array(3)[1, 4, 9]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// filter</span></span><br><span class="line"><span class="comment">// 创建一个新数组, 其包含通过所提供函数实现的测试的所有元素</span></span><br><span class="line"><span class="keyword">const</span> new_array2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].filter(<span class="function">(<span class="params">x</span>) =&gt;</span> x &gt; <span class="number">1</span>);</span><br><span class="line"><span class="comment">// Array [ 2, 3 ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// reduce</span></span><br><span class="line"><span class="comment">// reduce() 方法对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回值</span></span><br><span class="line"><span class="keyword">const</span> array1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">accumulator, currentValue</span>) =&gt;</span> accumulator + currentValue;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1 + 2 + 3 + 4</span></span><br><span class="line"><span class="built_in">console</span>.log(array1.reduce(reducer));</span><br><span class="line"><span class="comment">// expected output: 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 5 + 1 + 2 + 3 + 4</span></span><br><span class="line"><span class="built_in">console</span>.log(array1.reduce(reducer, <span class="number">5</span>));</span><br><span class="line"><span class="comment">// expected output: 15</span></span><br></pre></td></tr></table></figure>
+
+<h1><a href="#object" class="header-anchor">#</a><span id="object">Object</span></h1><h2><a href="#object-is-yu" class="header-anchor">#</a><span id="object-is-yu">Object.is 与 ===</span></h2><p>不同之处只有两个：</p>
+<ul>
+<li>+0 不等于-0</li>
+<li>NaN 等于自身</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.is(<span class="string">&quot;xixi&quot;</span>, <span class="string">&quot;xixi&quot;</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.is(&#123;&#125;, &#123;&#125;) + <span class="comment">//false</span></span><br><span class="line">  <span class="number">0</span> ===</span><br><span class="line">  -<span class="number">0</span>; <span class="comment">//true</span></span><br><span class="line"><span class="literal">NaN</span> === <span class="literal">NaN</span>; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.is(+<span class="number">0</span>, -<span class="number">0</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.is(<span class="literal">NaN</span>, <span class="literal">NaN</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#qian-kao-bei" class="header-anchor">#</a><span id="qian-kao-bei">浅拷贝</span></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 浅拷贝</span></span><br><span class="line"><span class="built_in">Object</span>.assign(target, ...sources);</span><br></pre></td></tr></table></figure>
+
+<h2><a href="#proto" class="header-anchor">#</a><span id="proto"><strong><em>proto</em></strong></span></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// __proto__ 建议换成</span></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(); <span class="comment">// （写操作）</span></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(); <span class="comment">// （读操作）</span></span><br><span class="line"><span class="built_in">Object</span>.create(); <span class="comment">// （生成操作）</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#fan-hui-dui-xiang-zi-shen-shu-xing-fei-ji-cheng" class="header-anchor">#</a><span id="fan-hui-dui-xiang-zi-shen-shu-xing-fei-ji-cheng">返回对象自身属性（非继承）</span></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回指定对象所有自身属性（非继承属性）的描述对象</span></span><br><span class="line"><span class="comment">// 自身属性、静态属性应该是一个意思</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor();</span><br></pre></td></tr></table></figure>
+
+<h2><a href="#bian-li" class="header-anchor">#</a><span id="bian-li">遍历</span></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 遍历 keys（不含继承的）</span></span><br><span class="line"><span class="comment">// Object.keys()</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span>, <span class="attr">baz</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(obj); <span class="comment">// [&quot;foo&quot;, &quot;baz&quot;]</span></span><br><span class="line"><span class="comment">// 遍历 values（不含继承的）</span></span><br><span class="line"><span class="built_in">Object</span>.values(obj);</span><br><span class="line"><span class="comment">// 遍历 entries（不含继承的）</span></span><br><span class="line"><span class="built_in">Object</span>.entries(obj); <span class="comment">// [[&quot;foo&quot;, &quot;baz&quot;], [ &quot;baz&quot;, 42 ]]</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#dong-jie" class="header-anchor">#</a><span id="dong-jie">冻结</span></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 冻结</span></span><br><span class="line"><span class="built_in">Object</span>.freeze(obj);</span><br><span class="line"><span class="comment">// 作为参数传递的对象与返回的对象都被冻结</span></span><br><span class="line"><span class="comment">// 所以不必保存返回的对象（因为两个对象全等）</span></span><br><span class="line"><span class="keyword">var</span> o = <span class="built_in">Object</span>.freeze(obj);</span><br><span class="line">o === obj; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.isFrozen(obj); <span class="comment">// === true</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#object-values-keys-entries" class="header-anchor">#</a><span id="object-values-keys-entries">Object.values/keys/entries</span></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.values(&#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span>, <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">4</span> &#125;);</span><br><span class="line"><span class="comment">// [1, 2, 3, 4]</span></span><br><span class="line"><span class="built_in">JSON</span>.stringify(<span class="built_in">Object</span>.entries(&#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span>, <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">4</span> &#125;));</span><br><span class="line"><span class="comment">// &quot;[[\&quot;x\&quot;,1],[\&quot;y\&quot;,2],[\&quot;a\&quot;,3],[\&quot;b\&quot;,4]]&quot;</span></span><br><span class="line"><span class="built_in">Object</span>.keys(&#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span>, <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">4</span> &#125;);</span><br><span class="line"><span class="comment">// [&quot;x&quot;, &quot;y&quot;, &quot;a&quot;, &quot;b&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h1><a href="#rest-yun-suan-fu" class="header-anchor">#</a><span id="rest-yun-suan-fu">rest 运算符</span></h1><p>与扩展符都是 <code>...</code> ，作用相反，用于代替 arguments 变量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bar = <span class="function"><span class="keyword">function</span> (<span class="params">a, ...args</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a);</span><br><span class="line">  <span class="built_in">console</span>.log(args);</span><br><span class="line">&#125;;</span><br><span class="line">bar(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="comment">//[ 2, 3, 4 ]</span></span><br></pre></td></tr></table></figure>
+
+<h1><a href="#array-map-shi-fou-gai-bian-yuan-shu-zu" class="header-anchor">#</a><span id="array-map-shi-fou-gai-bian-yuan-shu-zu">array.map 是否改变原数组</span></h1><p>map 不修改调用它的原数组本身（当然可以在 callback 执行时改变原数组）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&quot;Li&quot;</span>, <span class="attr">age</span>: <span class="number">10</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&quot;Hu&quot;</span>, <span class="attr">age</span>: <span class="number">12</span> &#125;,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">let</span> arr1 = arr.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">  item.age = item.age + <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> item;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(arr));</span><br><span class="line"><span class="comment">// &quot;[&#123;\&quot;name\&quot;:\&quot;Li\&quot;,\&quot;age\&quot;:12&#125;,&#123;\&quot;name\&quot;:\&quot;Hu\&quot;,\&quot;age\&quot;:14&#125;]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1><a href="#li-ji-zhi-xing-han-shu" class="header-anchor">#</a><span id="li-ji-zhi-xing-han-shu">立即执行函数</span></h1><p>立即执行函数其实就是一个语句</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 变量可以这样传递</span></span><br><span class="line"><span class="comment">// 引入全局变量</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">3</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">$</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log($);</span><br><span class="line">&#125;)(a); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出为全局变量，直接挂在 window 下</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">$, <span class="built_in">exports</span></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">exports</span>.Foo = <span class="string">&quot;wem&quot;</span>;</span><br><span class="line">&#125;)(jQuery, <span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/04/22/js/" data-id="cktl8wg13000i0z0cfa8z2pop" class="article-share-link" data-share="baidu" data-title="js">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/04/22/js/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-事件与监听" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/22/%E4%BA%8B%E4%BB%B6%E4%B8%8E%E7%9B%91%E5%90%AC/" class="article-date">
+  <time datetime="2021-04-22T03:51:08.000Z" itemprop="datePublished">2021-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/22/%E4%BA%8B%E4%BB%B6%E4%B8%8E%E7%9B%91%E5%90%AC/">事件与监听</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#xie-zai-unload-wen-dang-zhi-qian-xiang-web-fu-wu-qi-fa-song-shu-ju-mai-dian">卸载（unload）文档之前向 web 服务器发送数据（埋点）</a></li>
+<li><a href="#pagehide-event">pagehide event</a></li>
+<li><a href="#document-readystate">document.readyState</a></li>
+<li><a href="#shang-xia-wen-qie-huan">上下文切换</a></li>
+<li><a href="#usecapture">useCapture</a></li>
+<li><a href="#zhi-xing-shun-xu">执行顺序</a></li>
+<li><a href="#currenttarget-he-target">currentTarget 和 target</a></li>
+<li><a href="#zuo-biao-xiang-guan">坐标相关</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#xie-zai-unload-wen-dang-zhi-qian-xiang-web-fu-wu-qi-fa-song-shu-ju-mai-dian" class="header-anchor">#</a><span id="xie-zai-unload-wen-dang-zhi-qian-xiang-web-fu-wu-qi-fa-song-shu-ju-mai-dian">卸载（unload）文档之前向 web 服务器发送数据（埋点）</span></h1><p>Navigator.sendBeacon()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// onunload 特性(乃至 unload 事件本身) 并非使用 sendBeacon()的正确途径，</span></span><br><span class="line"><span class="comment">// 要调用 sendBeacon() 接口，应当使用 visibilitychange 和 pagehide 事件</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;unload&quot;</span>, logData, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> apiUrl = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  navigator.sendBeacon(apiUrl, analyticsData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#pagehide-event" class="header-anchor">#</a><span id="pagehide-event">pagehide event</span></h1><p>当浏览器在显示与会话历史记录不同的页面的过程中隐藏当前页面时，<strong><em>正常跳转、点击浏览器前进后退都会触发</em></strong>，离开页面不建议使用 unload beforeunload event</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;pagehide&quot;</span>, hide);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hide</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">debugger</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#document-readystate" class="header-anchor">#</a><span id="document-readystate">document.readyState</span></h1><ul>
+<li>loading（正在加载）</li>
+<li>interactive（可交互）<br>文档已被解析，”正在加载”状态结束，但是诸如图像，样式表和框架之类的子资源仍在加载</li>
+<li>complete（完成）<br>文档和所有子资源已完成加载</li>
+</ul>
+<h1><a href="#shang-xia-wen-qie-huan" class="header-anchor">#</a><span id="shang-xia-wen-qie-huan">上下文切换</span></h1><p>当使用 浏览器内置的 addEventListener() 时，上下文切换为目标 HTML 元素</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.appName = <span class="string">&quot;wem&quot;</span>;</span><br><span class="line">  <span class="built_in">document</span>.body.addEventListener(</span><br><span class="line">    <span class="string">&quot;click&quot;</span>,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 上下文发生改变，因此 appName 是 undefined</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.appName);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="literal">false</span></span><br><span class="line">  );</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#usecapture" class="header-anchor">#</a><span id="usecapture">useCapture</span></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// useCapture: 是否使用捕获模式</span></span><br><span class="line">div.addEventListener(</span><br><span class="line">  <span class="string">&quot;blur&quot;</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">  &#125;,</span><br><span class="line">  useCapture</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#zhi-xing-shun-xu" class="header-anchor">#</a><span id="zhi-xing-shun-xu">执行顺序</span></h1><p>一直捕获（触发所有父级别的捕获类型的事件），直到所触发的子元素，后冒泡。若该子元素上同时绑定了 捕获事件 A 和 冒泡事件 B，AB 的执行顺序同脚本中的顺序</p>
+<p>阻止冒泡 e.stopPropagation()<br>阻止默认行为 e.preventDefault()</p>
+<h1><a href="#currenttarget-he-target" class="header-anchor">#</a><span id="currenttarget-he-target">currentTarget 和 target</span></h1><p>currentTarget 总是指向事件绑定的元素，而 Event.target 则是事件触发的元素</p>
+<h1><a href="#zuo-biao-xiang-guan" class="header-anchor">#</a><span id="zuo-biao-xiang-guan">坐标相关</span></h1><p>clientX：当鼠标事件发生时（不管是 onclick，还是 omousemove，onmouseover 等），鼠标相对于浏览器（这里说的是浏览器的有效区域）x 轴的位置；<br>clientY：当鼠标事件发生时，鼠标相对于浏览器（这里说的是浏览器的有效区域）y 轴的位置；<br>screenX：当鼠标事件发生时，鼠标相对于显示器屏幕 x 轴的位置；<br>screenY：当鼠标事件发生时，鼠标相对于显示器屏幕 y 轴的位置；<br>offsetX：当鼠标事件发生时，鼠标相对于事件源 x 轴的位置<br>offsetY：当鼠标事件发生时，鼠标相对于事件源 y 轴的位置<br>pageX，pageY：事件发生时相对于页面（如 viewport 区域）的坐标</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/04/22/%E4%BA%8B%E4%BB%B6%E4%B8%8E%E7%9B%91%E5%90%AC/" data-id="cktl8wg1p00110z0c5wd98874" class="article-share-link" data-share="baidu" data-title="事件与监听">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/04/22/%E4%BA%8B%E4%BB%B6%E4%B8%8E%E7%9B%91%E5%90%AC/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/" rel="tag">html</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-js类" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/08/js%E7%B1%BB/" class="article-date">
+  <time datetime="2021-04-08T02:44:17.000Z" itemprop="datePublished">2021-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/08/js%E7%B1%BB/">js类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#es6">es6</a></li>
+<li><a href="#es5">es5</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#es6" class="header-anchor">#</a><span id="es6">es6</span></h1><img src="/2021/04/08/js%E7%B1%BB/class_es6.png" class width="1000" height="1000">
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 内部都挂在 prototype 上</span></span><br><span class="line">  <span class="comment">// === Father.prototype.constructor</span></span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">x, y</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;new.target&quot;</span>, <span class="keyword">new</span>.target);</span><br><span class="line">    <span class="comment">// new.target 指向 当前的类</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">new</span>.target === Father) &#123;</span><br><span class="line">      <span class="built_in">this</span>.x = x; <span class="comment">// 实例属性</span></span><br><span class="line">      <span class="built_in">this</span>.y = y;</span><br><span class="line">      <span class="built_in">this</span>.#x = x; <span class="comment">// 私有属性</span></span><br><span class="line">      <span class="built_in">this</span>.#y = y;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;必须使用 new 命令生成实例&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 实例方法</span></span><br><span class="line">  <span class="comment">// === Father.prototype.toString</span></span><br><span class="line">  <span class="function"><span class="title">toString</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;(&quot;</span> + <span class="built_in">this</span>.x + <span class="string">&quot;, &quot;</span> + <span class="built_in">this</span>.y + <span class="string">&quot;)&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// reset 属性的存取行为</span></span><br><span class="line">  <span class="keyword">get</span> <span class="title">prop</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;getter&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title">prop</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;setter: &quot;</span> + value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 属性名，可以采用表达式</span></span><br><span class="line">  [methodName]() &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 静态属性</span></span><br><span class="line">  <span class="keyword">static</span> staticProp = <span class="number">1</span>;</span><br><span class="line">  <span class="comment">// 静态方法</span></span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">classMethod</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 这里的 this 指向 class</span></span><br><span class="line">    <span class="comment">// 实例属性、方法内的 this 指向实例</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 私有方法</span></span><br><span class="line">  #<span class="function"><span class="title">sum</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.#x + <span class="built_in">this</span>.#y;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">x, y</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(x, y); <span class="comment">// 调用父类的 constructor(x, y)</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;new.target&quot;</span>, <span class="keyword">new</span>.target);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">superToString</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">super</span>.toString();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="title">classMethod</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">super</span>.classMethod() + <span class="string">&quot;, 从super对象上调用父类静态方法&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#es5" class="header-anchor">#</a><span id="es5">es5</span></h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 静态属性，类独享，只能这样调用 Person.name</span></span><br><span class="line">  <span class="built_in">this</span>.name = <span class="string">&quot;张三&quot;</span>;</span><br><span class="line">  <span class="built_in">this</span>.age = <span class="number">20</span>;</span><br><span class="line">  <span class="comment">// 实例方法</span></span><br><span class="line">  <span class="built_in">this</span>.run = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">&quot;在运动&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 实例属性</span></span><br><span class="line">Person.prototype.sex = <span class="string">&quot;男&quot;</span>;</span><br><span class="line"><span class="comment">// 实例方法</span></span><br><span class="line">Person.prototype.work = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">&quot;在工作&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 静态方法，类独享</span></span><br><span class="line">Person.getInfo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;我是静态方法&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p.name);</span><br><span class="line">p.run();</span><br><span class="line">p.work();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/04/08/js%E7%B1%BB/" data-id="cktl8wg16000k0z0cezal0fxg" class="article-share-link" data-share="baidu" data-title="js类">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/04/08/js%E7%B1%BB/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-基于nexus搭建私有npm服务器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/08/%E5%9F%BA%E4%BA%8Enexus%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89npm%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="article-date">
+  <time datetime="2021-04-08T02:38:32.000Z" itemprop="datePublished">2021-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/08/%E5%9F%BA%E4%BA%8Enexus%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89npm%E6%9C%8D%E5%8A%A1%E5%99%A8/">基于nexus搭建私有npm服务器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="toc">
+
+<!-- toc -->
+
+
+
+<!-- tocstop -->
+
+</div>
+
+<img src="/2021/04/08/%E5%9F%BA%E4%BA%8Enexus%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89npm%E6%9C%8D%E5%8A%A1%E5%99%A8/%E5%9F%BA%E4%BA%8Enexus%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89npm%E6%9C%8D%E5%8A%A1%E5%99%A8.png" class width="1000" height="1000">
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://example.com/2021/04/08/%E5%9F%BA%E4%BA%8Enexus%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89npm%E6%9C%8D%E5%8A%A1%E5%99%A8/" data-id="cktl8wg1u00180z0cfrqodzmu" class="article-share-link" data-share="baidu" data-title="基于nexus搭建私有npm服务器">Share</a>
+      
+
+      
+        <a href="http://example.com/2021/04/08/%E5%9F%BA%E4%BA%8Enexus%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89npm%E6%9C%8D%E5%8A%A1%E5%99%A8/#ds-thread" class="article-comment-link">Comments</a>
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/" rel="tag">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%81%E6%9C%8D/" rel="tag">私服</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+  </nav>
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typescript/" rel="tag">Typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/" rel="tag">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/githook/" rel="tag">githook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/" rel="tag">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-Typescript/" rel="tag">vue+Typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yarn/" rel="tag">yarn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%B9%E9%85%8D%E6%96%87%E4%BB%B6/" rel="tag">匹配文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BB%BA%E7%AB%99/" rel="tag">建站</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E9%A3%8E%E6%A0%BC/" rel="tag">接口风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%84%E5%BB%BA%E6%89%93%E5%8C%85/" rel="tag">构建打包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97/" rel="tag">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%81%E6%9C%8D/" rel="tag">私服</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4/" rel="tag">网络运维</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 lanying<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="totop"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"reqianduan"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>
