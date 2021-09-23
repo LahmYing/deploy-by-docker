@@ -2,8 +2,8 @@ FROM node
 
 ENV NODE_ENV=production
 ENV NODE_VERSION 14.17.3
-ENV YARN_VERSION 1.22.11
 
+# 工作区文件夹，非该项目所在文件夹
 ENV WORK_DIR=/usr/app/blog
 
 # 执行命令，创建文件夹
@@ -17,10 +17,10 @@ WORKDIR ${WORK_DIR}
 
 RUN node --version && npm --version && yarn --version
 
-COPY ["package.json", "package-lock.json*", "./"]
+COPY ["package.json", "package-lock.json*", "yarn.lock", "./"]
 
 # Install PM2 globally
-RUN yarn global add pm2
+RUN npm i yarn && yarn global add pm2
 
 # Install dependencies
 RUN yarn
