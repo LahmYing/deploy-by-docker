@@ -6,15 +6,15 @@
   
   <title>个人建站相关 | BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ssh 远程连接服务器 上传源码&#x2F;文件到服务器 直接上传到服务器 rsync&#x2F;scp 命令 在服务器上搭建一个 git&#x2F;scp 服务进行同步 搭建 git 私服     启动服务(node.js 环境) node.js 环境 使 node npm 命令全局有效   持续运行服务(node.js 环境)   防火墙 docker 相关 基本概念 创建 docker 环境 如何使用 dock">
+  <meta name="description" content="ssh 远程连接服务器 上传源码&#x2F;文件到服务器 直接上传到服务器 在服务器上搭建一个 git&#x2F;scp 服务进行同步 搭建 git 私服     启动服务(node.js 环境) node.js 环境 使 node npm 命令全局有效   持续运行服务(node.js 环境)   防火墙 docker 相关 基本概念 创建 docker 环境 如何使用 docker 部署应用 镜像操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="个人建站相关">
 <meta property="og:url" content="http://example.com/2021/09/17/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="BLOG">
-<meta property="og:description" content="ssh 远程连接服务器 上传源码&#x2F;文件到服务器 直接上传到服务器 rsync&#x2F;scp 命令 在服务器上搭建一个 git&#x2F;scp 服务进行同步 搭建 git 私服     启动服务(node.js 环境) node.js 环境 使 node npm 命令全局有效   持续运行服务(node.js 环境)   防火墙 docker 相关 基本概念 创建 docker 环境 如何使用 dock">
+<meta property="og:description" content="ssh 远程连接服务器 上传源码&#x2F;文件到服务器 直接上传到服务器 在服务器上搭建一个 git&#x2F;scp 服务进行同步 搭建 git 私服     启动服务(node.js 环境) node.js 环境 使 node npm 命令全局有效   持续运行服务(node.js 环境)   防火墙 docker 相关 基本概念 创建 docker 环境 如何使用 docker 部署应用 镜像操作">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-09-17T03:01:55.000Z">
-<meta property="article:modified_time" content="2021-09-22T14:49:56.229Z">
+<meta property="article:modified_time" content="2021-09-23T07:01:20.096Z">
 <meta property="article:author" content="lanying">
 <meta property="article:tag" content="网络运维">
 <meta property="article:tag" content="docker">
@@ -99,7 +99,6 @@
 <li><a href="#ssh-yuan-cheng-lian-jie-fu-wu-qi">ssh 远程连接服务器</a></li>
 <li><a href="#shang-chuan-yuan-ma-wen-jian-dao-fu-wu-qi">上传源码/文件到服务器</a><ul>
 <li><a href="#zhi-jie-shang-chuan-dao-fu-wu-qi">直接上传到服务器</a></li>
-<li><a href="#rsync-scp-ming-ling">rsync/scp 命令</a></li>
 <li><a href="#zai-fu-wu-qi-shang-da-jian-yi-ge-git-scp-fu-wu-jin-xing-tong-bu">在服务器上搭建一个 git/scp 服务进行同步</a><ul>
 <li><a href="#da-jian-git-si-fu">搭建 git 私服</a></li>
 </ul>
@@ -141,7 +140,6 @@
 <p>3.连接指定 host<br><code>ssh aliyun-lite</code> 即 <code>ssh &#123;host_name&#125;</code></p>
 <h1><a href="#shang-chuan-yuan-ma-wen-jian-dao-fu-wu-qi" class="header-anchor">#</a><span id="shang-chuan-yuan-ma-wen-jian-dao-fu-wu-qi">上传源码/文件到服务器</span></h1><h2><a href="#zhi-jie-shang-chuan-dao-fu-wu-qi" class="header-anchor">#</a><span id="zhi-jie-shang-chuan-dao-fu-wu-qi">直接上传到服务器</span></h2><p>ftp（文件传输协议）方式，ftp 允许用户以文件操作的方式（如文件的增、删、改、查、传送等）与另一主机相互通信</p>
 <p>五个最佳 FTP 客户端工具： <a target="_blank" rel="noopener" href="https://blog.csdn.net/yissan/article/details/51675651">https://blog.csdn.net/yissan/article/details/51675651</a></p>
-<h2><a href="#rsync-scp-ming-ling" class="header-anchor">#</a><span id="rsync-scp-ming-ling">rsync/scp 命令</span></h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jinxiao-pu/p/8833694.html">https://www.cnblogs.com/jinxiao-pu/p/8833694.html</a><br>可以集成于一个 shell 脚本 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/leepyng/p/7772941.html">https://www.cnblogs.com/leepyng/p/7772941.html</a></p>
 <h2><a href="#zai-fu-wu-qi-shang-da-jian-yi-ge-git-scp-fu-wu-jin-xing-tong-bu" class="header-anchor">#</a><span id="zai-fu-wu-qi-shang-da-jian-yi-ge-git-scp-fu-wu-jin-xing-tong-bu">在服务器上搭建一个 git/scp 服务进行同步</span></h2><h3><a href="#da-jian-git-si-fu" class="header-anchor">#</a><span id="da-jian-git-si-fu">搭建 git 私服</span></h3><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000013999832">https://segmentfault.com/a/1190000013999832</a></p>
 <h1><a href="#qi-dong-fu-wu-node-js-huan-jing" class="header-anchor">#</a><span id="qi-dong-fu-wu-node-js-huan-jing">启动服务(node.js 环境)</span></h1><h2><a href="#node-js-huan-jing" class="header-anchor">#</a><span id="node-js-huan-jing">node.js 环境</span></h2><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000013740262">https://segmentfault.com/a/1190000013740262</a></p>
 <h3><a href="#shi-node-npm-ming-ling-quan-ju-you-xiao" class="header-anchor">#</a><span id="shi-node-npm-ming-ling-quan-ju-you-xiao">使 node npm 命令全局有效</span></h3><h4><a href="#zhi-jie-pei-zhi-path-tui-jian" class="header-anchor">#</a><span id="zhi-jie-pei-zhi-path-tui-jian">直接配置 $PATH(推荐)</span></h4><h4><a href="#chuang-jian-ruan-lian-jie" class="header-anchor">#</a><span id="chuang-jian-ruan-lian-jie">创建软连接</span></h4><p>如果还没有环境，那么将 node 包复制到服务器上后，还需要 <strong><em>创建软连接</em></strong><br>linux ln -s 软链接： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sign-ptk/p/5655457.html">https://www.cnblogs.com/sign-ptk/p/5655457.html</a></p>
@@ -180,7 +178,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://example.com/2021/09/17/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99%E7%9B%B8%E5%85%B3/" data-id="cktnrzwv70002lf0c2g1w1cg3" class="article-share-link" data-share="baidu" data-title="个人建站相关">Share</a>
+        <a data-url="http://example.com/2021/09/17/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99%E7%9B%B8%E5%85%B3/" data-id="cku10bivf000z1c0c34p85cqs" class="article-share-link">Share</a>
       
 
       
@@ -217,7 +215,7 @@
 </article>
 
 
-  <section id="comments">
+  <section id="comments" style="display:none;">
     <div id="ds-thread" class="ds-thread" data-thread-key="2021/09/17/个人建站相关/" data-title="个人建站相关" data-url="http://example.com/2021/09/17/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99%E7%9B%B8%E5%85%B3/"></div>
   </section>
 </section>
@@ -228,7 +226,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typescript/" rel="tag">Typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/" rel="tag">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/githook/" rel="tag">githook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/" rel="tag">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-Typescript/" rel="tag">vue+Typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yarn/" rel="tag">yarn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%B9%E9%85%8D%E6%96%87%E4%BB%B6/" rel="tag">匹配文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%BA%94%E7%94%A8/" rel="tag">后端应用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BB%BA%E7%AB%99/" rel="tag">建站</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E9%A3%8E%E6%A0%BC/" rel="tag">接口风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%84%E5%BB%BA%E6%89%93%E5%8C%85/" rel="tag">构建打包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97/" rel="tag">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%81%E6%9C%8D/" rel="tag">私服</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4/" rel="tag">网络运维</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEO/" rel="tag">SEO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typescript/" rel="tag">Typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/" rel="tag">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/githook/" rel="tag">githook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/" rel="tag">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue-Typescript/" rel="tag">vue+Typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yarn/" rel="tag">yarn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B6%E4%BB%96/" rel="tag">其他</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%B9%E9%85%8D%E6%96%87%E4%BB%B6/" rel="tag">匹配文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF%E5%BA%94%E7%94%A8/" rel="tag">后端应用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/" rel="tag">应用架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BB%BA%E7%AB%99/" rel="tag">建站</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A5%E5%8F%A3%E9%A3%8E%E6%A0%BC/" rel="tag">接口风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%84%E5%BB%BA%E6%89%93%E5%8C%85/" rel="tag">构建打包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97/" rel="tag">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%81%E6%9C%8D/" rel="tag">私服</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6/" rel="tag">组件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E8%BF%90%E7%BB%B4/" rel="tag">网络运维</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%83%E8%AF%95/" rel="tag">调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -278,30 +276,6 @@ var duoshuoQuery = {short_name:"reqianduan"};
 
 
 <!-- 百度分享 start -->
-
-<div id="article-share-box" class="article-share-box">
-  <div id="bdshare" class="bdsharebuttonbox article-share-links">
-    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
-    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
-    <a class="article-share-more" data-cmd="more" title="更多"></a>
-  </div>
-</div>
-<script>
-  function SetShareData(cmd, config) {
-    if (shareDataTitle && shareDataUrl) {
-      config.bdText = shareDataTitle;
-      config.bdUrl = shareDataUrl;
-    }
-    return config;
-  }
-  window._bd_share_config={
-    "common":{onBeforeClick: SetShareData},
-    "share":{"bdCustomStyle":"/css/bdshare.css"}
-  };
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
 
 <!-- 百度分享 end -->
 

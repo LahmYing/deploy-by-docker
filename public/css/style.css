@@ -512,6 +512,9 @@ body {
 #nav-rss-link:before {
   content: "\f09e";
 }
+#nav-search-btn {
+  display: none;
+}
 #nav-search-btn:before {
   content: "\f002";
 }
@@ -803,6 +806,7 @@ a.article-title:hover {
   content: "#";
 }
 .article-comment-link {
+  display: none;
   float: right;
 }
 .article-comment-link:before {
@@ -811,6 +815,7 @@ a.article-title:hover {
   padding-right: 8px;
 }
 .article-share-link {
+  display: none;
   cursor: pointer;
   float: right;
   margin-left: 20px;
