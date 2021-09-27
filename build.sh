@@ -1,4 +1,3 @@
-# 只需修改版本号，即新建对应版本的镜像和容器
 # 暂不指定端口，方便在 portainer 处理版本和端口
 
 # command result to var 'tag'
