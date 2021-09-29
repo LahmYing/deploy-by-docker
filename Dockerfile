@@ -17,13 +17,15 @@ WORKDIR ${WORK_DIR}
 
 RUN node --version && npm --version && yarn --version
 
-COPY ["package.json", "package-lock.json*", "yarn.lock", "./"]
+# COPY ["package.json", "package-lock.json*", "yarn.lock", "./"]
+COPY ["./"]
 
 # Install PM2 globally
 RUN npm i yarn && yarn global add pm2
 
 # Install dependencies
-RUN yarn
+# RUN yarn
+RUN yarn && yarn compress
 
 # 校正时间
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime

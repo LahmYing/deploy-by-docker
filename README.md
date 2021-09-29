@@ -48,4 +48,6 @@ docker run \
 
 ## 压缩
 
-`$ yarn compress`
+支持以下两种方式
+
+- `$ yarn compress`
