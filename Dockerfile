@@ -18,7 +18,7 @@ WORKDIR ${WORK_DIR}
 RUN node --version && npm --version && yarn --version
 
 # COPY ["package.json", "package-lock.json*", "yarn.lock", "./"]
-COPY ["./"]
+COPY ./ ./
 
 # Install PM2 globally
 RUN npm i yarn && yarn global add pm2
