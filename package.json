@@ -13,6 +13,9 @@
     "yarn": "^1.22.11"
   },
   "devDependencies": {
-    "html-minifier": "^4.0.0"
+    "html-minifier": "^4.0.0",
+    "imagemin": "7.0.1",
+    "imagemin-jpegtran": "6.0.0",
+    "imagemin-pngquant": "7.0.0"
   }
 }
