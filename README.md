@@ -44,5 +44,8 @@ docker run \
     $myimage
 ```
 
-# 优化静态文件（webpack）
+# 优化静态文件
 
+## 压缩
+
+`$ yarn compress`

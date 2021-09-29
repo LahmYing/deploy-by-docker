@@ -2368,7 +2368,7 @@ type-is@^1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-uglify-js@^3.5.1:
+uglify-js@^3.14.2, uglify-js@^3.5.1:
   version "3.14.2"
   resolved "https://registry.nlark.com/uglify-js/download/uglify-js-3.14.2.tgz?cache=0&sync_timestamp=1631026519465&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fuglify-js%2Fdownload%2Fuglify-js-3.14.2.tgz#d7dd6a46ca57214f54a2d0a43cad0f35db82ac99"
   integrity sha1-191qRspXIU9UotCkPK0PNduCrJk=

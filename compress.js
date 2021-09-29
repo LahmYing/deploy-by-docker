@@ -8,6 +8,8 @@ let imagemin = require("imagemin");
 let imageminJpegtran = require("imagemin-jpegtran");
 let imageminPngquant = require("imagemin-pngquant");
 
+let UglifyJS = require("uglify-js");
+
 let rootPath = "./public";
 // 遍历目录
 let traversePath = (path) => {
@@ -30,6 +32,9 @@ let traversePath = (path) => {
           case ".jpg":
           case ".jpeg":
             compressImage(curPath);
+            break;
+          case ".js":
+            compressJs(curPath);
             break;
           default:
             break;
@@ -82,7 +87,7 @@ let compressHtml = (filePath) => {
 };
 
 let compressImage = (filePath) => {
-  let image;
+  // let image;
   let len = filePath.lastIndexOf("/");
   let destination = filePath.slice(0, len);
   imagemin([filePath], {
@@ -107,13 +112,21 @@ let compressImage = (filePath) => {
         }
       });
       */
-    image = result;
+    // image = result;
+    console.log(`compressImage = ${filePath}`);
   });
   // .catch((error) => { // imagemin 这插件不会报错，不会运行至此
   //   console.log(`error compressImage = ${filePath}`);
   // });
 };
 
-// compressImage("./public/img/scrollup.png");
+let compressJs = (filePath) => {
+  fs.writeFileSync(
+    filePath,
+    UglifyJS.minify(fs.readFileSync(filePath, "utf8")).code,
+    "utf8"
+  );
+  console.log(`compressJs = ${filePath}`);
+};
 
 traversePath(rootPath);
