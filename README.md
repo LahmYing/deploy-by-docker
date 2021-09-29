@@ -1,4 +1,3 @@
-<!-- toc -->
 # 作用
 
 用于部署静态项目，比如此处的 `./public`，是 https://github.com/LahmYing/blog 项目的构建产物
@@ -44,3 +43,6 @@ docker run \
     --restart always \
     $myimage
 ```
+
+# 优化静态文件（webpack）
+

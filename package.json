@@ -2,7 +2,8 @@
   "name": "blog",
   "version": "0.1.0",
   "scripts": {
-    "serve": "node ./app.js"
+    "serve": "node ./app.js",
+    "comp": "node ./compress.js"
   },
   "dependencies": {
     "koa": "^2.13.1",
@@ -10,5 +11,8 @@
     "koa-static": "^5.0.0",
     "koa-views": "^7.0.1",
     "yarn": "^1.22.11"
+  },
+  "devDependencies": {
+    "html-minifier": "^4.0.0"
   }
 }
