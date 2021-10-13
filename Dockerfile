@@ -1,7 +1,11 @@
-FROM node
+# FROM node
 
-ENV NODE_ENV=production
-ENV NODE_VERSION 14.17.3
+# 使用基础版本的 Alpine 镜像，自己安装Nodejs
+FROM alpine:latest
+RUN apk add --no-cache --update nodejs nodejs-npm
+
+# ENV NODE_ENV=production
+# ENV NODE_VERSION 14.17.3
 
 # 工作区文件夹，非该项目所在文件夹
 ENV WORK_DIR=/usr/app/blog
