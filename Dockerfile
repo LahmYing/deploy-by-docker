@@ -1,8 +1,10 @@
 # FROM node
 
 # 使用基础版本的 Alpine 镜像，自己安装Nodejs
-FROM alpine:latest
-RUN apk add --no-cache --update nodejs nodejs-npm
+# FROM alpine:latest
+# RUN apk add --no-cache --update nodejs nodejs-npm
+
+FROM node:alpine
 
 # ENV NODE_ENV=production
 # ENV NODE_VERSION 14.17.3
