@@ -135,6 +135,38 @@
 <!-- toc -->
 
 <ul>
+<li><a href="#vue2-x-yuan-ma-jie-du">Vue2.x 源码解读</a><ul>
+<li><a href="#package-json">package.json</a></li>
+<li><a href="#flow">flow</a></li>
+<li><a href="#mu-lu">目录</a></li>
+<li><a href="#runtime-only-vs-runtime-compiler">Runtime Only VS Runtime + Compiler</a></li>
+<li><a href="#sheng-chan-zhong-shi-you-new-vue-de">生产中是有 new Vue() 的</a></li>
+<li><a href="#vue-ding-yi">Vue 定义</a></li>
+<li><a href="#shu-ju-qu-dong-de-yi-xie-chong-yao-liu-cheng">数据驱动的一些重要流程</a><ul>
+<li><a href="#mount">$mount</a></li>
+<li><a href="#vm-render"><code>vm._render</code></a></li>
+<li><a href="#vnode-ding-yi">VNode 定义</a></li>
+<li><a href="#vm-update"><code>vm._update</code></a></li>
+</ul>
+</li>
+<li><a href="#zu-jian-hua-de-yi-xie-chong-yao-liu-cheng">组件化的一些重要流程</a><ul>
+<li><a href="#createcomponent">createComponent</a></li>
+<li><a href="#sheng-ming-zhou-qi">生命周期</a></li>
+<li><a href="#quan-ju-ju-bu-zu-jian">全局/局部组件</a></li>
+<li><a href="#yi-bu-zu-jian">异步组件</a></li>
+</ul>
+</li>
+<li><a href="#xiang-ying-shi-de-yi-xie-chong-yao-liu-cheng">响应式的一些重要流程</a></li>
+<li><a href="#kuo-zhan">扩展</a><ul>
+<li><a href="#event">event</a></li>
+<li><a href="#slot">slot</a></li>
+<li><a href="#keep-alive">keep-alive</a></li>
+</ul>
+</li>
+<li><a href="#vue-router">Vue-Router</a></li>
+</ul>
+</li>
+<li><a href="#qi-ta">其他</a><ul>
 <li><a href="#fu-gai-zu-jian-ku-ivew-yang-shi">覆盖组件库 ivew 样式</a></li>
 <li><a href="#vue-cha-jian">vue 插件</a></li>
 <li><a href="#yang-shi-fu-gai-vue-de-scoped-he-deep">样式覆盖、Vue 的 scoped 和 /deep/</a></li>
@@ -145,19 +177,73 @@
 <li><a href="#vuex">vuex</a></li>
 <li><a href="#nexttick">nextTick</a></li>
 </ul>
+</li>
+</ul>
 <!-- tocstop -->
 
 </div>
 
-<h1><a href="#fu-gai-zu-jian-ku-ivew-yang-shi" class="header-anchor">#</a><span id="fu-gai-zu-jian-ku-ivew-yang-shi">覆盖组件库 ivew 样式</span></h1><p>main.js 中。 <strong><em>跟 CSS 文件的引用次序有关</em></strong></p>
+<h1><a href="#vue2-x-yuan-ma-jie-du" class="header-anchor">#</a><span id="vue2-x-yuan-ma-jie-du">Vue2.x 源码解读</span></h1><p><a href="https://ustbhuangyi.github.io/vue-analysis/v2/prepare/">https://ustbhuangyi.github.io/vue-analysis/v2/prepare/</a></p>
+<h2><a href="#package-json" class="header-anchor">#</a><span id="package-json">package.json</span></h2><p><a href="https://github.com/vuejs/vue/blob/dev/package.json">https://github.com/vuejs/vue/blob/dev/package.json</a></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;@babel/core&quot;: &quot;^7.0.0&quot;,</span><br><span class="line">    &quot;@babel/plugin-proposal-class-properties&quot;: &quot;^7.1.0&quot;,</span><br><span class="line">    &quot;@babel/plugin-syntax-dynamic-import&quot;: &quot;^7.0.0&quot;,</span><br><span class="line">    &quot;@babel/plugin-syntax-jsx&quot;: &quot;^7.0.0&quot;,</span><br><span class="line">    &quot;@babel/plugin-transform-flow-strip-types&quot;: &quot;^7.0.0&quot;,</span><br><span class="line">    &quot;@babel/preset-env&quot;: &quot;^7.0.0&quot;,</span><br><span class="line">    &quot;@babel/register&quot;: &quot;^7.0.0&quot;,</span><br><span class="line">    &quot;@types/node&quot;: &quot;^12.12.0&quot;, // 声明文件</span><br><span class="line">    &quot;@types/webpack&quot;: &quot;^4.4.22&quot;, // 声明文件</span><br><span class="line">    &quot;acorn&quot;: &quot;^5.2.1&quot;, // js -&gt; AST</span><br><span class="line">    &quot;babel-eslint&quot;: &quot;^10.0.1&quot;,</span><br><span class="line">    &quot;babel-helper-vue-jsx-merge-props&quot;: &quot;^2.0.3&quot;,</span><br><span class="line">    &quot;babel-loader&quot;: &quot;^8.0.4&quot;,</span><br><span class="line">    &quot;babel-plugin-istanbul&quot;: &quot;^5.1.0&quot;,</span><br><span class="line">    &quot;babel-plugin-transform-vue-jsx&quot;: &quot;^4.0.1&quot;,</span><br><span class="line">    &quot;babel-preset-flow-vue&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">    &quot;buble&quot;: &quot;^0.19.3&quot;, // js -&gt; es5, 基本都支持 es6 除了 IE11</span><br><span class="line">    &quot;chalk&quot;: &quot;^2.3.0&quot;,</span><br><span class="line">    &quot;chromedriver&quot;: &quot;^2.45.0&quot;, // for e2e test</span><br><span class="line">    &quot;codecov&quot;: &quot;^3.0.0&quot;, // 测试结果可视化</span><br><span class="line">    &quot;commitizen&quot;: &quot;^2.9.6&quot;, // 规范 commit message, 提交工具</span><br><span class="line">    &quot;conventional-changelog&quot;: &quot;^1.1.3&quot;, // 规范 commit message, 约定格式的适配器</span><br><span class="line">    &quot;cross-spawn&quot;: &quot;^6.0.5&quot;, // node 中，child_process.spawn 使用指定的命令行参数创建新进程，&quot;cross-spawn&quot;: A cross platform solution to node&#x27;s spawn and spawnSync</span><br><span class="line">    &quot;cz-conventional-changelog&quot;: &quot;^2.0.0&quot;, // 规范 commit message, 约定格式的适配器</span><br><span class="line">    &quot;de-indent&quot;: &quot;^1.0.2&quot;, // 从代码块中删除额外的缩进</span><br><span class="line">    &quot;es6-promise&quot;: &quot;^4.1.0&quot;, // This is a polyfill of the ES6 Promise</span><br><span class="line">    &quot;escodegen&quot;: &quot;^1.8.1&quot;, // AST -&gt; js</span><br><span class="line">    &quot;eslint&quot;: &quot;^5.7.0&quot;,</span><br><span class="line">    &quot;eslint-plugin-flowtype&quot;: &quot;^2.34.0&quot;,</span><br><span class="line">    &quot;eslint-plugin-jasmine&quot;: &quot;^2.8.4&quot;,</span><br><span class="line">    &quot;file-loader&quot;: &quot;^3.0.1&quot;,</span><br><span class="line">    &quot;flow-bin&quot;: &quot;^0.61.0&quot;,</span><br><span class="line">    &quot;hash-sum&quot;: &quot;^1.0.2&quot;,</span><br><span class="line">    &quot;he&quot;: &quot;^1.1.1&quot;, // HTML encoder/decoder</span><br><span class="line">    &quot;http-server&quot;: &quot;^0.12.3&quot;,</span><br><span class="line">    &quot;jasmine&quot;: &quot;^2.99.0&quot;, // 单元测试工具</span><br><span class="line">    &quot;jasmine-core&quot;: &quot;^2.99.0&quot;,</span><br><span class="line">    <span class="comment">// 一个可以在多个浏览器中执行js代码的简单工具。它不是一个完整的测试框架，没有断言库(比如jasmine或者mocha)，只是启动了一个http服务器，然后生成测试html文件，执行测试用例的js</span></span><br><span class="line">    &quot;karma&quot;: &quot;^3.1.1&quot;,</span><br><span class="line">    &quot;karma-chrome-launcher&quot;: &quot;^2.1.1&quot;,</span><br><span class="line">    &quot;karma-coverage&quot;: &quot;^1.1.1&quot;,</span><br><span class="line">    &quot;karma-firefox-launcher&quot;: &quot;^1.0.1&quot;,</span><br><span class="line">    &quot;karma-jasmine&quot;: &quot;^1.1.0&quot;,</span><br><span class="line">    &quot;karma-mocha-reporter&quot;: &quot;^2.2.3&quot;,</span><br><span class="line">    &quot;karma-phantomjs-launcher&quot;: &quot;^1.0.4&quot;,</span><br><span class="line">    &quot;karma-safari-launcher&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">    &quot;karma-sauce-launcher&quot;: &quot;^2.0.2&quot;,</span><br><span class="line">    &quot;karma-sourcemap-loader&quot;: &quot;^0.3.7&quot;,</span><br><span class="line">    &quot;karma-webpack&quot;: &quot;^4.0.0-rc.2&quot;,</span><br><span class="line">    &quot;lint-staged&quot;: &quot;^8.0.0&quot;,</span><br><span class="line">    &quot;lodash&quot;: &quot;^4.17.4&quot;,</span><br><span class="line">    &quot;lodash.template&quot;: &quot;^4.4.0&quot;,</span><br><span class="line">    &quot;lodash.uniq&quot;: &quot;^4.5.0&quot;,</span><br><span class="line">    &quot;lru-cache&quot;: &quot;^5.1.1&quot;, // A cache object that deletes the least-recently-used items</span><br><span class="line">    &quot;nightwatch&quot;: &quot;^0.9.16&quot;,  // web-ui自动化测试框架, for e2e test</span><br><span class="line">    &quot;nightwatch-helpers&quot;: &quot;^1.2.0&quot;,</span><br><span class="line">    &quot;phantomjs-prebuilt&quot;: &quot;^2.1.14&quot;, // Headless WebKit with JS API, 建议换成 Headless Chrome</span><br><span class="line">    &quot;puppeteer&quot;: &quot;^1.11.0&quot;, // 控制 headless Chrome</span><br><span class="line">    &quot;resolve&quot;: &quot;^1.3.3&quot;,</span><br><span class="line">    &quot;rollup&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">    &quot;rollup-plugin-alias&quot;: &quot;^1.3.1&quot;,</span><br><span class="line">    &quot;rollup-plugin-buble&quot;: &quot;^0.19.6&quot;,</span><br><span class="line">    &quot;rollup-plugin-commonjs&quot;: &quot;^9.2.0&quot;,</span><br><span class="line">    &quot;rollup-plugin-flow-no-whitespace&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">    &quot;rollup-plugin-node-resolve&quot;: &quot;^4.0.0&quot;,</span><br><span class="line">    &quot;rollup-plugin-replace&quot;: &quot;^2.0.0&quot;,</span><br><span class="line">    &quot;selenium-server&quot;: &quot;^2.53.1&quot;, // exports the selenium server path</span><br><span class="line">    &quot;serialize-javascript&quot;: &quot;^3.1.0&quot;, // Serialize-javascript 能够序列化 JavaScript 库中含有正则表达式和功能的 JSON 包</span><br><span class="line">    &quot;shelljs&quot;: &quot;^0.8.1&quot;, // 在javascript代码中编写shell命令实现功能</span><br><span class="line">    &quot;terser&quot;: &quot;^3.10.2&quot;, // A JavaScript parser and mangler/compressor toolkit for ES6+</span><br><span class="line">    &quot;typescript&quot;: &quot;^3.6.4&quot;,</span><br><span class="line">    &quot;webpack&quot;: &quot;~4.28.4&quot;,</span><br><span class="line">    &quot;weex-js-runtime&quot;: &quot;^0.23.6&quot;,</span><br><span class="line">    &quot;weex-styler&quot;: &quot;^0.3.0&quot;,</span><br><span class="line">    &quot;yorkie&quot;: &quot;^2.0.0&quot; // yorkie实际是fork husky，然后做了一些定制化的改动，使得钩子能从package.json的 &quot;gitHooks&quot;属性中读取</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h2><a href="#flow" class="header-anchor">#</a><span id="flow">flow</span></h2><p>js + type</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*@flow*/</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#mu-lu" class="header-anchor">#</a><span id="mu-lu">目录</span></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">src</span><br><span class="line">├── compiler # 编译相关</span><br><span class="line">├── core # 核心代码</span><br><span class="line">├── platforms # 不同平台的支持</span><br><span class="line">├── server # 服务端渲染</span><br><span class="line">├── sfc # .vue 文件解析 -&gt; js obj</span><br><span class="line">├── shared # 共享代码</span><br></pre></td></tr></table></figure>
+
+<h2><a href="#runtime-only-vs-runtime-compiler" class="header-anchor">#</a><span id="runtime-only-vs-runtime-compiler">Runtime Only VS Runtime + Compiler</span></h2><p>Compiler: template string -&gt; AST -&gt; code</p>
+<p>只要有 template string，包括 SFC，都需要 Compiler</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要编译器的版本</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  template: <span class="string">&quot;&lt;div&gt;&#123;&#123; hi &#125;&#125;&lt;/div&gt;&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这种情况不需要</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params">h</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> h(<span class="string">&quot;div&quot;</span>, <span class="built_in">this</span>.hi);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2><a href="#sheng-chan-zhong-shi-you-new-vue-de" class="header-anchor">#</a><span id="sheng-chan-zhong-shi-you-new-vue-de">生产中是有 new Vue() 的</span></h2><p>在 dist 中搜 new Vue() 即知, vue.runtime.min.js 被嵌在 app.[hash].js 里</p>
+<h2><a href="#vue-ding-yi" class="header-anchor">#</a><span id="vue-ding-yi">Vue 定义</span></h2><p>src/core/instance/index.js</p>
+<h2><a href="#shu-ju-qu-dong-de-yi-xie-chong-yao-liu-cheng" class="header-anchor">#</a><span id="shu-ju-qu-dong-de-yi-xie-chong-yao-liu-cheng">数据驱动的一些重要流程</span></h2><p><code>new Vue(el, ...) -&gt; vm.$option.el -&gt; vm.$mount</code> 初始化生命周期、事件中心、渲染、data、props、computed、watcher 等等</p>
+<p><code>template in el -&gt; render() -&gt; vm.$mount</code> 无论 SFC 的 还是 js 中的 template，都会转为 render()，然后再 $mount。 <code>el 挂载点</code></p>
+<h3><a href="#mount" class="header-anchor">#</a><span id="mount">$mount</span></h3><p><code>Watcher(vm._render 生成虚拟 Node -&gt; vm._update 更新 DOM) -&gt; mounted hook</code> 初始化和监控的数据变动时触发 Watcher</p>
+<h3><a href="#vm-render" class="header-anchor">#</a><span id="vm-render"><code>vm._render</code></span></h3><p><code>vm._render -&gt; render(内调用 createElement -&gt; return vnode -&gt; new VNode)</code></p>
+<h3><a href="#vnode-ding-yi" class="header-anchor">#</a><span id="vnode-ding-yi">VNode 定义</span></h3><p>src/core/vdom/vnode.js</p>
+<p>VNode and children VNode -&gt; VNode tree</p>
+<h3><a href="#vm-update" class="header-anchor">#</a><span id="vm-update"><code>vm._update</code></span></h3><p><code>vm._update -&gt; vm.__patch__</code> 最后调用 DOM api: insertBefore、appendChild 等，插入顺序先子后父</p>
+<h2><a href="#zu-jian-hua-de-yi-xie-chong-yao-liu-cheng" class="header-anchor">#</a><span id="zu-jian-hua-de-yi-xie-chong-yao-liu-cheng">组件化的一些重要流程</span></h2><h3><a href="#createcomponent" class="header-anchor">#</a><span id="createcomponent">createComponent</span></h3><p>createComponent 和 createElement 的目的都是产出 VNode<br>需要注意的是和普通元素节点的 vnode 不同，组件的 vnode 是没有 children vnode 的</p>
+<p>内逻辑</p>
+<ul>
+<li>创建一个 Vue 子类 Sub</li>
+<li>merge options</li>
+<li>install hooks</li>
+<li>return component VNode</li>
+<li>new VNode</li>
+</ul>
+<h3><a href="#sheng-ming-zhou-qi" class="header-anchor">#</a><span id="sheng-ming-zhou-qi">生命周期</span></h3><h4><a href="#beforemount-mounted" class="header-anchor">#</a><span id="beforemount-mounted">beforeMount mounted</span></h4><p><code>beforeMount hook -&gt; 产出 VNode -&gt; patch -&gt; mounted hook</code></p>
+<p>最后的 mounted hook，如果是组件 VNode 走到这一步，各个组件的 mounted hook 会被 push 到一个 queue，排队执行，先子后父</p>
+<h4><a href="#beforeupdate-amp-updated" class="header-anchor">#</a><span id="beforeupdate-amp-updated">beforeUpdate &amp; updated</span></h4><p>mounted -&gt; beforeUpdate hook -&gt; watcher 执行完我们定义的程序 -&gt; updated hook</p>
+<h4><a href="#destroy" class="header-anchor">#</a><span id="destroy">destroy</span></h4><p>destroy 钩子函数执行顺序是先子后父，和 mounted 过程一样</p>
+<h3><a href="#quan-ju-ju-bu-zu-jian" class="header-anchor">#</a><span id="quan-ju-ju-bu-zu-jian">全局/局部组件</span></h3><p>Vue.options.components<br>vm.$options.components</p>
+<h3><a href="#yi-bu-zu-jian" class="header-anchor">#</a><span id="yi-bu-zu-jian">异步组件</span></h3><p>估计：编译分 chunk 时标记 require、()=&gt;import 的组件在哪个 chunk，到时就到哪个 chunk 找<br>加载异步组件 -&gt; vm.$forceUpdate()</p>
+<h4><a href="#patch" class="header-anchor">#</a><span id="patch">patch</span></h4><p>会先给异步组件占位，方便后续的 patch 和 $forceUpdate()</p>
+<h2><a href="#xiang-ying-shi-de-yi-xie-chong-yao-liu-cheng" class="header-anchor">#</a><span id="xiang-ying-shi-de-yi-xie-chong-yao-liu-cheng">响应式的一些重要流程</span></h2><p>patch 是一个异步过程， VNode -&gt; nextTick -&gt; DOM</p>
+<p>修改 msg 后 template 中 <code>&lt;div id=&quot;MSG&quot;&gt; &#123;&#123; msg &#125;&#125; &lt;/div&gt;</code> 也正确修改了，此时浏览器上显示的 msg 也是修改后的，但是此时 <code>这个 tag 的 DOM 还没更新！</code>，console 下即知</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.$refs.MSG; <span class="comment">// DOM 未更新</span></span><br><span class="line"><span class="built_in">this</span>.nextTick(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.$refs.MSG; <span class="comment">// DOM 已更新，依赖该 DOM 的代码需在此处执行</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">this</span>.$refs.MSG; <span class="comment">// DOM 未更新</span></span><br></pre></td></tr></table></figure>
+
+<h2><a href="#kuo-zhan" class="header-anchor">#</a><span id="kuo-zhan">扩展</span></h2><h3><a href="#event" class="header-anchor">#</a><span id="event">event</span></h3><p>只有组件节点才可以添加自定义事件，并且添加原生 DOM 事件需要使用 native 修饰符；而普通元素使用 .native 修饰符是没有作用的，也只能添加原生 DOM 事件</p>
+<h3><a href="#slot" class="header-anchor">#</a><span id="slot">slot</span></h3><p>普通插槽和作用域插槽作用域的不同源于 <code>VNode</code> 在哪里渲染</p>
+<p>VNode 若直接在父组件渲染，则数据挂在父组件的 $options 下，子组件肯定不能直接访问</p>
+<p>作用域插槽是把部分数据相关的 VNode 也放到子组件中进行渲染，所以子组件就能直接访问</p>
+<h3><a href="#keep-alive" class="header-anchor">#</a><span id="keep-alive">keep-alive</span></h3><ul>
+<li>使用 slot</li>
+<li>缓存了 VNode</li>
+<li>patch 时缓存过的组件不走 mounted hook</li>
+</ul>
+<h2><a href="#vue-router" class="header-anchor">#</a><span id="vue-router">Vue-Router</span></h2><p>Vue-Router 的 install 方法（使用 Vue.mixin，mixin 作用是合并 options）会给每一个组件注入 beforeCreate 和 destoryed 钩子函数，在 beforeCreate 做一些私有属性定义和路由初始化工作</p>
+<h1><a href="#qi-ta" class="header-anchor">#</a><span id="qi-ta">其他</span></h1><h2><a href="#fu-gai-zu-jian-ku-ivew-yang-shi" class="header-anchor">#</a><span id="fu-gai-zu-jian-ku-ivew-yang-shi">覆盖组件库 ivew 样式</span></h2><p>main.js 中。 <strong><em>跟 CSS 文件的引用次序有关</em></strong></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;view-design/dist/styles/iview.css&quot;</span>;</span><br><span class="line"><span class="comment">// 定制主题色</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./assets/customTheme/index.less&quot;</span>;</span><br></pre></td></tr></table></figure>
 
-<h1><a href="#vue-cha-jian" class="header-anchor">#</a><span id="vue-cha-jian">vue 插件</span></h1><p><a href="https://github.com/vuejs/awesome-vue">https://github.com/vuejs/awesome-vue</a></p>
-<h1><a href="#yang-shi-fu-gai-vue-de-scoped-he-deep" class="header-anchor">#</a><span id="yang-shi-fu-gai-vue-de-scoped-he-deep">样式覆盖、Vue 的 scoped 和 /deep/</span></h1><img src="/2021/08/26/Vue/Vue%E7%9A%84scoped%E5%92%8Cdeep.png" class width="1000" height="1000" title="image desc">
+<h2><a href="#vue-cha-jian" class="header-anchor">#</a><span id="vue-cha-jian">vue 插件</span></h2><p><a href="https://github.com/vuejs/awesome-vue">https://github.com/vuejs/awesome-vue</a></p>
+<h2><a href="#yang-shi-fu-gai-vue-de-scoped-he-deep" class="header-anchor">#</a><span id="yang-shi-fu-gai-vue-de-scoped-he-deep">样式覆盖、Vue 的 scoped 和 /deep/</span></h2><img src="/2021/08/26/Vue/Vue%E7%9A%84scoped%E5%92%8Cdeep.png" class width="1000" height="1000" title="image desc">
 
-<h1><a href="#te-xing" class="header-anchor">#</a><span id="te-xing">特性</span></h1><img src="/2021/08/26/Vue/VueFeature.png" class width="1000" height="1000">
+<h2><a href="#te-xing" class="header-anchor">#</a><span id="te-xing">特性</span></h2><img src="/2021/08/26/Vue/VueFeature.png" class width="1000" height="1000">
 
-<h1><a href="#vue-zhong-yi-bu-chuan-props-diu-shi-shu-ju" class="header-anchor">#</a><span id="vue-zhong-yi-bu-chuan-props-diu-shi-shu-ju">Vue 中异步传 props 丢失数据</span></h1><ul>
+<h2><a href="#vue-zhong-yi-bu-chuan-props-diu-shi-shu-ju" class="header-anchor">#</a><span id="vue-zhong-yi-bu-chuan-props-diu-shi-shu-ju">Vue 中异步传 props 丢失数据</span></h2><ul>
 <li>子组件加上 v-if, 如</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Child</span> <span class="attr">v-if</span>=<span class="string">&quot;task.taskType === 21&quot;</span> <span class="attr">:taskDetail</span>=<span class="string">&quot;task&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
@@ -165,9 +251,9 @@
 <ul>
 <li>子组件中使用 watch</li>
 </ul>
-<h1><a href="#yin-ru-vue-min-js-shi-vue-devtools-hui-shi-xiao" class="header-anchor">#</a><span id="yin-ru-vue-min-js-shi-vue-devtools-hui-shi-xiao">引入 vue.min.js 时 vue-devtools 会失效</span></h1><h1><a href="#vue-router-history-mode" class="header-anchor">#</a><span id="vue-router-history-mode">Vue router history mode</span></h1><p>需要服务端支持，只需要服务端在遇到任何路由都返回 index.html 即可（前端为单页应用的话）</p>
-<h1><a href="#vuex" class="header-anchor">#</a><span id="vuex">vuex</span></h1><p>默认情况下，模块内部的 action、mutation 和 getter 是注册在全局命名空间的——这样使得多个模块能够对同一 mutation 或 action 作出响应</p>
-<h1><a href="#nexttick" class="header-anchor">#</a><span id="nexttick">nextTick</span></h1><p>值更新， 值对应的 dom 未更新， 此时你想基于<code>更新后的 dom</code>执行 A 函数，需将 A 函数放于 nextTick 内</p>
+<h2><a href="#yin-ru-vue-min-js-shi-vue-devtools-hui-shi-xiao" class="header-anchor">#</a><span id="yin-ru-vue-min-js-shi-vue-devtools-hui-shi-xiao">引入 vue.min.js 时 vue-devtools 会失效</span></h2><h2><a href="#vue-router-history-mode" class="header-anchor">#</a><span id="vue-router-history-mode">Vue router history mode</span></h2><p>需要服务端支持，只需要服务端在遇到任何路由都返回 index.html 即可（前端为单页应用的话）</p>
+<h2><a href="#vuex" class="header-anchor">#</a><span id="vuex">vuex</span></h2><p>默认情况下，模块内部的 action、mutation 和 getter 是注册在全局命名空间的——这样使得多个模块能够对同一 mutation 或 action 作出响应</p>
+<h2><a href="#nexttick" class="header-anchor">#</a><span id="nexttick">nextTick</span></h2><p>值更新， 值对应的 dom 未更新， 此时你想基于<code>更新后的 dom</code>执行 A 函数，需将 A 函数放于 nextTick 内</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;channel-manage&quot;&gt;</span><br><span class="line">    channel-manage</span><br><span class="line">    &lt;div id&#x3D;&quot;next-tick-html&quot;&gt;&#123;&#123; &quot;showDelModal: &quot; &#125;&#125;&#123;&#123; showDelModal &#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang&#x3D;&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Vue, Component, Prop, Watch &#125; from &quot;vue-property-decorator&quot;;</span><br><span class="line">import &#123; State, Getter, Action &#125; from &quot;vuex-class&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; required even empty</span><br><span class="line">@Component(&#123;&#125;)</span><br><span class="line">export default class ChannelList extends Vue &#123;</span><br><span class="line">  showDelModal &#x3D; false;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; life hook</span><br><span class="line">  created() &#123;</span><br><span class="line">    this.showDelModal &#x3D; true;</span><br><span class="line"></span><br><span class="line">    console.log(&quot;no-next-tick-value&quot;, this.showDelModal);</span><br><span class="line">    console.log(&quot;no-next-tick-dom&quot;, document.getElementById(&quot;next-tick-html&quot;));</span><br><span class="line">    this.$nextTick(() &#x3D;&gt; &#123;</span><br><span class="line">      console.log(&quot;next-tick-value&quot;, this.showDelModal);</span><br><span class="line">      console.log(&quot;next-tick-dom&quot;, document.getElementById(&quot;next-tick-html&quot;));</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
@@ -284,9 +370,37 @@
 <h2><a href="#cha-kan-yuan-cheng-yu-ben-di-fen-zhi-dui-ying-guan-xi" class="header-anchor">#</a><span id="cha-kan-yuan-cheng-yu-ben-di-fen-zhi-dui-ying-guan-xi">查看远程与本地分支对应关系</span></h2><p><code>git remote show origin</code><br>再运行一次 <code>git branch -a</code> 就能看到变化了</p>
 <h2><a href="#shua-xin-yuan-cheng-fen-zhi-you-de-yuan-cheng-fen-zhi-yi-shan-chu-dan-ben-di-reng-xian-shi" class="header-anchor">#</a><span id="shua-xin-yuan-cheng-fen-zhi-you-de-yuan-cheng-fen-zhi-yi-shan-chu-dan-ben-di-reng-xian-shi">刷新远程分支（有的远程分支已删除但本地仍显示）</span></h2><p><code>git remote prune origin</code></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">lanying@lanyingdeMacBook-Pro some-project % git remote prune origin</span><br><span class="line">Pruning origin</span><br><span class="line">URL: git@xxx/some-project.git</span><br><span class="line"> * [pruned] origin/dev</span><br><span class="line"> * [pruned] origin/feat-0910</span><br><span class="line"> * [pruned] origin/<span class="built_in">test</span></span><br><span class="line">lanying@lanyingdeMacBook-Pro some-project %</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#cha-kan-git-config" class="header-anchor">#</a><span id="cha-kan-git-config">查看 git config</span></h1><figure class="highlight zsh"><table><tr><td class="code"><pre><span class="line">git config --global --list</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">vim ~/.gitconfig</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gulp+vue</title>
+    <url>/2021/10/09/gulp-vue/</url>
+    <content><![CDATA[<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#vue-sfc-bian-yi-wei-js">vue SFC 编译为 .js</a></li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#vue-sfc-bian-yi-wei-js" class="header-anchor">#</a><span id="vue-sfc-bian-yi-wei-js">vue SFC 编译为 .js</span></h1><p><a href="https://www.gulpjs.com.cn/docs/getting-started/quick-start/">https://www.gulpjs.com.cn/docs/getting-started/quick-start/</a><br><a href="https://www.npmjs.com/package/gulp-vue-compiler">https://www.npmjs.com/package/gulp-vue-compiler</a><br><a href="https://www.npmjs.com/package/babel-env">https://www.npmjs.com/package/babel-env</a><br><a href="https://github.com/vuejs/vue-component-compiler/issues/28">https://github.com/vuejs/vue-component-compiler/issues/28</a></p>
+<p>cmd</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gulp 命令行工具</span></span><br><span class="line">yarn global add gulp-cli</span><br><span class="line">yarn add gulp gulp-vue-compiler babel-env</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行 task</span></span><br><span class="line">gulp vue-compile</span><br></pre></td></tr></table></figure>
+
+<p>gulpfile.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> vueCompiler = <span class="built_in">require</span>(<span class="string">&quot;gulp-vue-compiler&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> gulp = <span class="built_in">require</span>(<span class="string">&quot;gulp&quot;</span>);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">&quot;vue-compile&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    .src(<span class="string">&quot;src/components/**/*.vue&quot;</span>)</span><br><span class="line">    .pipe(</span><br><span class="line">      vueCompiler(&#123;</span><br><span class="line">        newExtension: <span class="string">&quot;js&quot;</span>, <span class="comment">// *.vue =&gt; *.js</span></span><br><span class="line">        babel: &#123;</span><br><span class="line">          babelrc: <span class="literal">false</span>,</span><br><span class="line">          presets: [</span><br><span class="line">            [</span><br><span class="line">              <span class="string">&quot;env&quot;</span>,</span><br><span class="line">              &#123;</span><br><span class="line">                modules: <span class="literal">false</span>, <span class="comment">// Keep ES modules in &#x27;script&#x27; tag</span></span><br><span class="line">                targets: &#123;</span><br><span class="line">                  browsers: [<span class="string">&quot;&gt; 1%&quot;</span>, <span class="string">&quot;last 2 versions&quot;</span>],</span><br><span class="line">                &#125;,</span><br><span class="line">              &#125;,</span><br><span class="line">            ],</span><br><span class="line">            <span class="string">&quot;stage-3&quot;</span>,</span><br><span class="line">          ],</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .pipe(gulp.dest(<span class="string">&quot;./dist/&quot;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>vue</tag>
+        <tag>gulp</tag>
       </tags>
   </entry>
   <entry>
@@ -297,6 +411,7 @@
 <!-- toc -->
 
 <ul>
+<li><a href="#nei-rong-an-quan-ce-lue-csp">内容安全策略（CSP）</a></li>
 <li><a href="#qing-qiu-tou-bu-fa-song-referer">请求头不发送 Referer</a></li>
 <li><a href="#template-bu-yu-shu-ju-jie-gou-ou-he">template 不与数据结构耦合</a></li>
 <li><a href="#bom-browser-object-model">BOM(browser object model)</a></li>
@@ -312,6 +427,7 @@
 
 </div>
 
+<h1><a href="#nei-rong-an-quan-ce-lue-csp" class="header-anchor">#</a><span id="nei-rong-an-quan-ce-lue-csp">内容安全策略（CSP）</span></h1><p><a href="https://blog.csdn.net/qq_37943295/article/details/79978761">https://blog.csdn.net/qq_37943295/article/details/79978761</a></p>
 <h1><a href="#qing-qiu-tou-bu-fa-song-referer" class="header-anchor">#</a><span id="qing-qiu-tou-bu-fa-song-referer">请求头不发送 Referer</span></h1><p><a href="https://segmentfault.com/q/1010000000123441">https://segmentfault.com/q/1010000000123441</a><br><a href="https://blog.csdn.net/qq_37236241/article/details/119330230">https://blog.csdn.net/qq_37236241/article/details/119330230</a></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">openWithoutReferer</span>(<span class="params">url</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.open(</span><br><span class="line">      <span class="string">&quot;javascript:window.name;&quot;</span>,</span><br><span class="line">      <span class="string">&quot;&lt;script&gt;location.replace(&#x27;&quot;</span> + url + <span class="string">&quot;&#x27;)&lt;/scr&quot;</span> + <span class="string">&quot;ipt&gt;&quot;</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -827,39 +943,6 @@
       </tags>
   </entry>
   <entry>
-    <title>vue公共组件</title>
-    <url>/2021/09/08/vue%E5%85%AC%E5%85%B1%E7%BB%84%E4%BB%B6/</url>
-    <content><![CDATA[<div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#can-kao-xie-fa">参考写法</a><ul>
-<li><a href="#chong-dian">重点</a></li>
-<li><a href="#wen-jian-jie-gou">文件结构</a><ul>
-<li><a href="#index-ts">index.ts</a></li>
-<li><a href="#message-vue">Message.vue</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><a href="#can-kao-xie-fa" class="header-anchor">#</a><span id="can-kao-xie-fa">参考写法</span></h1><h2><a href="#chong-dian" class="header-anchor">#</a><span id="chong-dian">重点</span></h2><p>在单例上进行扩展和处理</p>
-<h2><a href="#wen-jian-jie-gou" class="header-anchor">#</a><span id="wen-jian-jie-gou">文件结构</span></h2><figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">message</span><br><span class="line">- index.ts</span><br><span class="line">- Message.vue</span><br></pre></td></tr></table></figure>
-
-<h3><a href="#index-ts" class="header-anchor">#</a><span id="index-ts">index.ts</span></h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Message <span class="keyword">from</span> <span class="string">&quot;./Message.vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> MessageType = <span class="string">&quot;default&quot;</span> | <span class="string">&quot;success&quot;</span> | <span class="string">&quot;error&quot;</span> | <span class="string">&quot;warning&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> MessageOptions &#123;</span><br><span class="line">  <span class="keyword">type</span>?: MessageType;</span><br><span class="line">  time?: <span class="built_in">number</span>;</span><br><span class="line">  callback?: <span class="function">() =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  单例模式</span></span><br><span class="line"><span class="keyword">let</span> vm;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> install = <span class="function">(<span class="params">Vue</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> Component = Vue.extend(Message);</span><br><span class="line"></span><br><span class="line">  Vue.prototype.$message = (</span><br><span class="line">    content: <span class="built_in">String</span>,</span><br><span class="line">    options?: MessageType | MessageOptions</span><br><span class="line">  ) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> data = &#123;</span><br><span class="line">      content,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (vm) &#123;</span><br><span class="line">      vm.$destroy();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> options === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">      data[<span class="string">&quot;type&quot;</span>] = options;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">Object</span>.assign(data, options);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> instance = <span class="keyword">new</span> Component(&#123;</span><br><span class="line">      data,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    vm = instance.$mount();</span><br><span class="line">    vm.show = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    vm.$on(<span class="string">&quot;destroyed&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      vm = <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> vm;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install,</span><br><span class="line">  Message,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3><a href="#message-vue" class="header-anchor">#</a><span id="message-vue">Message.vue</span></h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;transition name&#x3D;&quot;slide&quot; @after-leave&#x3D;&quot;afterLeave&quot;&gt;</span><br><span class="line">    &lt;div v-if&#x3D;&quot;show&quot; :class&#x3D;&quot;component_class&quot; @click&#x3D;&quot;show &#x3D; false&quot;&gt;</span><br><span class="line">      &#123;&#123; content &#125;&#125;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;transition&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang&#x3D;&quot;less&quot; scoped&gt;</span><br><span class="line">.message &#123;</span><br><span class="line">  position: fixed;</span><br><span class="line">  bottom: 60px;</span><br><span class="line">  left: 50%;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">  color: #333;</span><br><span class="line">  padding: 5px 10px;</span><br><span class="line">  text-align: center;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  opacity: 0.9;</span><br><span class="line">  border-radius: 4px;</span><br><span class="line">  min-width: 60px;</span><br><span class="line">  max-width: 60%;</span><br><span class="line">  word-break: break-all;</span><br><span class="line">  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.16);</span><br><span class="line">  transform: translate(-50%, 0);</span><br><span class="line">  z-index: 10001;</span><br><span class="line"></span><br><span class="line">  &amp;.default &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: #333;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;.success &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: @success;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;.warning &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: @warning;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;.error &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: @error;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.slide-enter-active,</span><br><span class="line">.slide-leave-active &#123;</span><br><span class="line">  transition: all 0.3s;</span><br><span class="line">&#125;</span><br><span class="line">.slide-enter,</span><br><span class="line">.slide-leave-to &#123;</span><br><span class="line">  transform: translate(-50%, 10px);</span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang&#x3D;&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Vue, Component &#125; from &quot;vue-property-decorator&quot;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;&#125;)</span><br><span class="line">export default class Toast extends Vue &#123;</span><br><span class="line">  show &#x3D; false;</span><br><span class="line">  content &#x3D; &quot;&quot;;</span><br><span class="line">  time &#x3D; 2000;</span><br><span class="line">  type &#x3D; &quot;default&quot;;</span><br><span class="line">  callback &#x3D; null;</span><br><span class="line"></span><br><span class="line">  get component_class() &#123;</span><br><span class="line">    return [&quot;message&quot;, &#96;$&#123;this.type&#125;&#96;];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  mounted() &#123;</span><br><span class="line">    document.body.appendChild(this.$el);</span><br><span class="line">    this.time &amp;&amp; setTimeout(this.close, this.time);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  beforeDestroy() &#123;</span><br><span class="line">    document.body.removeChild(this.$el);</span><br><span class="line">    this.callback &amp;&amp;</span><br><span class="line">      this.$nextTick(() &#x3D;&gt; &#123;</span><br><span class="line">        this.callback();</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  destroyed() &#123;</span><br><span class="line">    this.$emit(&quot;destroyed&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  close() &#123;</span><br><span class="line">    this.show &#x3D; false;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  afterLeave() &#123;</span><br><span class="line">    this.$destroy();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>vue+ts</title>
     <url>/2021/09/01/vue-ts/</url>
     <content><![CDATA[<div class="toc">
@@ -883,6 +966,37 @@
 ]]></content>
       <tags>
         <tag>vue+Typescript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue公共组件</title>
+    <url>/2021/09/08/vue%E5%85%AC%E5%85%B1%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#quan-ju-dan-li-gong-gong-zu-jian">全局单例公共组件</a><ul>
+<li><a href="#wen-jian-jie-gou">文件结构</a><ul>
+<li><a href="#index-ts">index.ts</a></li>
+<li><a href="#message-vue">Message.vue</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#quan-ju-dan-li-gong-gong-zu-jian" class="header-anchor">#</a><span id="quan-ju-dan-li-gong-gong-zu-jian">全局单例公共组件</span></h1><h2><a href="#wen-jian-jie-gou" class="header-anchor">#</a><span id="wen-jian-jie-gou">文件结构</span></h2><figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">message</span><br><span class="line">- index.ts</span><br><span class="line">- Message.vue</span><br></pre></td></tr></table></figure>
+
+<h3><a href="#index-ts" class="header-anchor">#</a><span id="index-ts">index.ts</span></h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Message <span class="keyword">from</span> <span class="string">&quot;./Message.vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">type</span> MessageType = <span class="string">&quot;default&quot;</span> | <span class="string">&quot;success&quot;</span> | <span class="string">&quot;error&quot;</span> | <span class="string">&quot;warning&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> MessageOptions &#123;</span><br><span class="line">  <span class="keyword">type</span>?: MessageType;</span><br><span class="line">  time?: <span class="built_in">number</span>;</span><br><span class="line">  callback?: <span class="function">() =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  单例模式</span></span><br><span class="line"><span class="keyword">let</span> vm;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> install = <span class="function">(<span class="params">Vue</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> Component = Vue.extend(Message);</span><br><span class="line"></span><br><span class="line">  Vue.prototype.$message = (</span><br><span class="line">    content: <span class="built_in">String</span>,</span><br><span class="line">    options?: MessageType | MessageOptions</span><br><span class="line">  ) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> data = &#123;</span><br><span class="line">      content,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (vm) &#123;</span><br><span class="line">      <span class="comment">// 全局只保持一个 Message 公共组件</span></span><br><span class="line">      vm.$destroy();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> options === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">      data[<span class="string">&quot;type&quot;</span>] = options;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">Object</span>.assign(data, options);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> instance = <span class="keyword">new</span> Component(&#123;</span><br><span class="line">      data,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    vm = instance.$mount();</span><br><span class="line">    vm.show = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    vm.$on(<span class="string">&quot;destroyed&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      vm = <span class="literal">null</span>;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> vm;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install,</span><br><span class="line">  Message,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3><a href="#message-vue" class="header-anchor">#</a><span id="message-vue">Message.vue</span></h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;transition name&#x3D;&quot;slide&quot; @after-leave&#x3D;&quot;afterLeave&quot;&gt;</span><br><span class="line">    &lt;div v-if&#x3D;&quot;show&quot; :class&#x3D;&quot;component_class&quot; @click&#x3D;&quot;show &#x3D; false&quot;&gt;</span><br><span class="line">      &#123;&#123; content &#125;&#125;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;transition&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang&#x3D;&quot;less&quot; scoped&gt;</span><br><span class="line">.message &#123;</span><br><span class="line">  position: fixed;</span><br><span class="line">  bottom: 60px;</span><br><span class="line">  left: 50%;</span><br><span class="line">  font-size: 14px;</span><br><span class="line">  color: #333;</span><br><span class="line">  padding: 5px 10px;</span><br><span class="line">  text-align: center;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  opacity: 0.9;</span><br><span class="line">  border-radius: 4px;</span><br><span class="line">  min-width: 60px;</span><br><span class="line">  max-width: 60%;</span><br><span class="line">  word-break: break-all;</span><br><span class="line">  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.16);</span><br><span class="line">  transform: translate(-50%, 0);</span><br><span class="line">  z-index: 10001;</span><br><span class="line"></span><br><span class="line">  &amp;.default &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: #333;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;.success &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: @success;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;.warning &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: @warning;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;.error &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: @error;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.slide-enter-active,</span><br><span class="line">.slide-leave-active &#123;</span><br><span class="line">  transition: all 0.3s;</span><br><span class="line">&#125;</span><br><span class="line">.slide-enter,</span><br><span class="line">.slide-leave-to &#123;</span><br><span class="line">  transform: translate(-50%, 10px);</span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang&#x3D;&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Vue, Component &#125; from &quot;vue-property-decorator&quot;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;&#125;)</span><br><span class="line">export default class Toast extends Vue &#123;</span><br><span class="line">  show &#x3D; false;</span><br><span class="line">  content &#x3D; &quot;&quot;;</span><br><span class="line">  time &#x3D; 2000;</span><br><span class="line">  type &#x3D; &quot;default&quot;;</span><br><span class="line">  callback &#x3D; null;</span><br><span class="line"></span><br><span class="line">  get component_class() &#123;</span><br><span class="line">    return [&quot;message&quot;, &#96;$&#123;this.type&#125;&#96;];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  mounted() &#123;</span><br><span class="line">    document.body.appendChild(this.$el);</span><br><span class="line">    this.time &amp;&amp; setTimeout(this.close, this.time);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  beforeDestroy() &#123;</span><br><span class="line">    document.body.removeChild(this.$el);</span><br><span class="line">    this.callback &amp;&amp;</span><br><span class="line">      this.$nextTick(() &#x3D;&gt; &#123;</span><br><span class="line">        this.callback();</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  destroyed() &#123;</span><br><span class="line">    this.$emit(&quot;destroyed&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  close() &#123;</span><br><span class="line">    this.show &#x3D; false;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  afterLeave() &#123;</span><br><span class="line">    this.$destroy();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
@@ -1096,6 +1210,112 @@
       </tags>
   </entry>
   <entry>
+    <title>优化</title>
+    <url>/2021/09/30/%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#you-hua-cuo-shi">优化措施</a><ul>
+<li><a href="#wang-luo">网络</a></li>
+<li><a href="#zi-yuan-ti-ji">资源体积</a><ul>
+<li><a href="#iconfont-zi-ti-tu-biao-dai-ti-tu-pian-tu-biao">iconfont，字体图标代替图片图标</a></li>
+<li><a href="#tu-pian-jia-zai-shi-ji-ti-ji">图片加载时机、体积</a></li>
+<li><a href="#module">module</a></li>
+</ul>
+</li>
+<li><a href="#qia-dun">卡顿</a></li>
+<li><a href="#cha-zhao-biao">查找表</a></li>
+</ul>
+</li>
+<li><a href="#you-hua-yuan-ze">优化原则</a></li>
+<li><a href="#xiang-guan">相关</a><ul>
+<li><a href="#ye-mian-jia-zai-hao-shi">页面加载耗时</a><ul>
+<li><a href="#shou-ping-hao-shi">首屏耗时</a></li>
+<li><a href="#gua-yong-yu-spa-de-lu-you-qie-huan">适用于 SPA 的路由切换</a></li>
+</ul>
+</li>
+<li><a href="#liu-lan-qi-de-xuan-ran-shi-dan-xian-cheng-de">浏览器的渲染是单线程的</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><a href="#you-hua-cuo-shi" class="header-anchor">#</a><span id="you-hua-cuo-shi">优化措施</span></h1><p><a href="https://segmentfault.com/a/1190000022205291">https://segmentfault.com/a/1190000022205291</a><br><a href="https://github.com/fouber/blog">https://github.com/fouber/blog</a><br><a href="https://segmentfault.com/a/1190000022696744">https://segmentfault.com/a/1190000022696744</a></p>
+<h2><a href="#wang-luo" class="header-anchor">#</a><span id="wang-luo">网络</span></h2><ul>
+<li>请求数<ul>
+<li>跟资源数相关，每个请求都有等待时间</li>
+<li>目前资源都是经 webpack 处理的 chunk ，无需针对这点做优化</li>
+</ul>
+</li>
+<li>Chrome 最多并发 6 个 TCP 连接</li>
+<li>http2 优势<ul>
+<li>一个 http1 请求占一个 TCP 连接，http2 请求可并发于一个 TCP 连接</li>
+<li>header 压缩</li>
+<li>可设置各请求优先级</li>
+</ul>
+</li>
+<li>静态资源使用 CDN</li>
+<li>浏览器缓存策略<ul>
+<li>304: 使用服务器缓存</li>
+<li><code>from cache</code>: 使用浏览器本地缓存<ul>
+<li>max-age 决定浏览器是否<code>使用本地缓存而不向服务器发起请求</code>，浏览器遇到相同文件名的资源(比如 main.js)，此时还没到 max-age，那便会使用缓存，但实际上 main.js 的内容可能已经变了，把内容映射成 <code>hash</code>，main.js 变成 main.${hash}.js，这样就确保了资源的唯一性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2><a href="#zi-yuan-ti-ji" class="header-anchor">#</a><span id="zi-yuan-ti-ji">资源体积</span></h2><h3><a href="#iconfont-zi-ti-tu-biao-dai-ti-tu-pian-tu-biao" class="header-anchor">#</a><span id="iconfont-zi-ti-tu-biao-dai-ti-tu-pian-tu-biao">iconfont，字体图标代替图片图标</span></h3><ul>
+<li><a href="https://www.jianshu.com/p/94d718dd2fef?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation">图片图标转字体图标</a></li>
+<li><a href="https://github.com/patrickhulce/fontmin-webpack">iconfont 压缩: fontmin-webpack</a></li>
+<li><a href="https://www.iconfont.cn/">Iconfont-阿里巴巴矢量图标库</a></li>
+</ul>
+<h3><a href="#tu-pian-jia-zai-shi-ji-ti-ji" class="header-anchor">#</a><span id="tu-pian-jia-zai-shi-ji-ti-ji">图片加载时机、体积</span></h3><ul>
+<li>懒加载</li>
+<li>压缩：tinypng, 插件</li>
+<li>webp、svg、base64、缩略图</li>
+</ul>
+<h3><a href="#module" class="header-anchor">#</a><span id="module">module</span></h3><ul>
+<li>提取 module.超过 2 次 3 次引用的都可以提，反正加载过一次都会有缓存</li>
+<li>减少 app.js 中的公共模块，即减少首屏资源体积</li>
+</ul>
+<h2><a href="#qia-dun" class="header-anchor">#</a><span id="qia-dun">卡顿</span></h2><p>动画或页面的帧率比设备屏幕刷新率(常见 60Hz)低时，会有卡顿的感觉</p>
+<p><a href="https://zhuanlan.zhihu.com/p/25166666">https://zhuanlan.zhihu.com/p/25166666</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame">https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame</a></p>
+<h4><a href="#xuan-ran-liu-cheng" class="header-anchor">#</a><span id="xuan-ran-liu-cheng">渲染流程</span></h4><p>(js -&gt;) style -&gt; layout -&gt; paint -&gt; composite -&gt; screen</p>
+<h4><a href="#chrome-devtool-zhong-cha-kan-qia-dun-de-zheng" class="header-anchor">#</a><span id="chrome-devtool-zhong-cha-kan-qia-dun-de-zheng">Chrome devtool 中查看卡顿的帧</span></h4><h4><a href="#cai-ji-qia-dun-cheng-du" class="header-anchor">#</a><span id="cai-ji-qia-dun-cheng-du">采集卡顿程度</span></h4><p><a href="https://fed.taobao.org/blog/taofed/do71ct/web-performance/?spm=taofed.blogs.blog-list.8.75e65ac8r0IX6q">https://fed.taobao.org/blog/taofed/do71ct/web-performance/?spm=taofed.blogs.blog-list.8.75e65ac8r0IX6q</a></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>() - t);</span><br><span class="line">  t = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">&#125;, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+<h4><a href="#jie-jue-qia-dun" class="header-anchor">#</a><span id="jie-jue-qia-dun">解决卡顿</span></h4><ul>
+<li>对于 60Hz 来说，1 帧的时长约 (1000/60)ms，除去系统上下文切换开销，每一帧中只留给我们 10ms 左右的脚本处理时间</li>
+<li>js 脚本修改 DOM 造成 layout repaint，若脚本执行耗时长，这一帧耗时便长，屏幕刷新时这一帧还没更新就卡顿了，如何解决：<ul>
+<li>拆分该脚本，分在几帧里执行。帧耗时缩短，帧数变多，帧频提升</li>
+<li>简化 DOM 结构</li>
+</ul>
+</li>
+</ul>
+<h2><a href="#cha-zhao-biao" class="header-anchor">#</a><span id="cha-zhao-biao">查找表</span></h2><h1><a href="#you-hua-yuan-ze" class="header-anchor">#</a><span id="you-hua-yuan-ze">优化原则</span></h1><ul>
+<li>动画流畅</li>
+<li>能不加载的先别加载<ul>
+<li>后续的内容保留钩子，利用 JS 动态渲染（比如 createElement 和 Vue 中 v-if）</li>
+</ul>
+</li>
+<li>能不执行的先别执行</li>
+</ul>
+<p><code>DOMContentLoaded 事件</code> 页面 DOM 加载完成即触发，而无需等待样式表、图像和子框架的完全加载<br><code>load 事件</code> 全加载完毕</p>
+<h1><a href="#xiang-guan" class="header-anchor">#</a><span id="xiang-guan">相关</span></h1><h2><a href="#ye-mian-jia-zai-hao-shi" class="header-anchor">#</a><span id="ye-mian-jia-zai-hao-shi">页面加载耗时</span></h2><h3><a href="#shou-ping-hao-shi" class="header-anchor">#</a><span id="shou-ping-hao-shi">首屏耗时</span></h3><p>在 window.onload 事件里执行 new Date() - performance.timing.navigationStart 即可获取首屏时间</p>
+<h3><a href="#gua-yong-yu-spa-de-lu-you-qie-huan" class="header-anchor">#</a><span id="gua-yong-yu-spa-de-lu-you-qie-huan">适用于 SPA 的路由切换</span></h3><p>Vue</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** 加法 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">accAdd</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> r1, r2, m;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    r1 = arg1.toString().split(<span class="string">&quot;.&quot;</span>)[<span class="number">1</span>].length;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    r1 = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    r2 = arg2.toString().split(<span class="string">&quot;.&quot;</span>)[<span class="number">1</span>].length;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    r2 = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  m = <span class="built_in">Math</span>.pow(<span class="number">10</span>, <span class="built_in">Math</span>.max(r1, r2));</span><br><span class="line">  <span class="keyword">return</span> (arg1 * m + arg2 * m) / m;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">router.afterEach(<span class="function">(<span class="params">to, <span class="keyword">from</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/** 累计所加载的资源，不包含当前页面 */</span></span><br><span class="line">  <span class="keyword">let</span> accumulatedRs = <span class="built_in">window</span>.performance</span><br><span class="line">    .getEntriesByType(<span class="string">&quot;resource&quot;</span>)</span><br><span class="line">    .map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> newItem = &#123;</span><br><span class="line">        name: item.name,</span><br><span class="line">        duration: item.duration,</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="keyword">return</span> newItem;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/** 存储中的 accumulatedRs */</span></span><br><span class="line">  <span class="keyword">let</span> storageRs = <span class="built_in">localStorage</span>.accumulatedRs;</span><br><span class="line">  <span class="keyword">let</span> storageRsLength = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> (storageRs &amp;&amp; storageRs.startsWith(<span class="string">&quot;[&quot;</span>)) &#123;</span><br><span class="line">    <span class="comment">// 刷新页面之前， accumulatedRs 会一直累加；刷新后， accumulatedRs 会被重置，所以会出现 storageRs 比 accumulatedRs 要多的情况</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">JSON</span>.parse(storageRs).length &gt;= accumulatedRs.length) &#123;</span><br><span class="line">      storageRs = <span class="built_in">localStorage</span>.accumulatedRs = <span class="string">&quot;&quot;</span>;</span><br><span class="line">      storageRsLength = <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      storageRsLength = <span class="built_in">JSON</span>.parse(storageRs).length;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    storageRs = <span class="built_in">localStorage</span>.accumulatedRs = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    storageRsLength = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> loadTime = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> len = accumulatedRs.length - storageRsLength;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> r = accumulatedRs.slice(-len)[i];</span><br><span class="line">    loadTime = accAdd(loadTime, r.duration);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">localStorage</span>.accumulatedRs = <span class="built_in">JSON</span>.stringify(accumulatedRs);</span><br><span class="line">  <span class="keyword">let</span> lastPage = router.resolve(<span class="keyword">from</span>).href;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`上个页面 = <span class="subst">$&#123;lastPage&#125;</span> --- 加载耗时 = <span class="subst">$&#123;loadTime.toFixed(<span class="number">2</span>)&#125;</span>ms`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2><a href="#liu-lan-qi-de-xuan-ran-shi-dan-xian-cheng-de" class="header-anchor">#</a><span id="liu-lan-qi-de-xuan-ran-shi-dan-xian-cheng-de">浏览器的渲染是单线程的</span></h2><p>浏览器的渲染是单线程的，在某一个时刻要么在进行 JS 运算，要么在进行 UI 渲染。不会同时进行</p>
+]]></content>
+      <tags>
+        <tag>优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>其他</title>
     <url>/2021/09/06/%E5%85%B6%E4%BB%96/</url>
     <content><![CDATA[<div class="toc">
@@ -1105,6 +1325,7 @@
 <ul>
 <li><a href="#sheng-cheng-mu-lu-shu">生成目录树</a></li>
 <li><a href="#vim">vim</a></li>
+<li><a href="#mac-yong-hu-quan-xian-wen-ti">mac 用户权限问题</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -1113,6 +1334,7 @@
 <h1><a href="#sheng-cheng-mu-lu-shu" class="header-anchor">#</a><span id="sheng-cheng-mu-lu-shu">生成目录树</span></h1><p>win 下<br><code>$ tree /f &gt; tree.md</code></p>
 <p>mac 下 bash<br><code>tree &gt; tree.md</code></p>
 <h1><a href="#vim" class="header-anchor">#</a><span id="vim">vim</span></h1><p>i 进入编辑模式<br>esc 后输入 :wq 保存退出</p>
+<h1><a href="#mac-yong-hu-quan-xian-wen-ti" class="header-anchor">#</a><span id="mac-yong-hu-quan-xian-wen-ti">mac 用户权限问题</span></h1><p>遇到 <code>Permission Denied</code> 不要再 <code>sudo</code> 了，<a href="https://blog.csdn.net/onepiece1234/article/details/77757068">关闭 SIP</a> 即可</p>
 ]]></content>
       <tags>
         <tag>其他</tag>
@@ -1403,27 +1625,6 @@
       </tags>
   </entry>
   <entry>
-    <title>移动端</title>
-    <url>/2021/09/06/%E7%A7%BB%E5%8A%A8%E7%AB%AF/</url>
-    <content><![CDATA[<div class="toc">
-
-<!-- toc -->
-
-<ul>
-<li><a href="#0-5px">0.5px</a></li>
-</ul>
-<!-- tocstop -->
-
-</div>
-
-<h1><a href="#0-5px" class="header-anchor">#</a><span id="0-5px">0.5px</span></h1><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 直接加 class 即可用 */</span></span><br><span class="line"><span class="selector-attr">[class*=<span class="string">&quot;mri-hairline&quot;</span>]</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[class*=<span class="string">&quot;mri-hairline&quot;</span>]</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">&quot; &quot;</span>;</span><br><span class="line">  <span class="attribute">pointer-events</span>: none;</span><br><span class="line">  <span class="attribute">top</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">right</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">0</span> solid <span class="number">#ddd</span>;</span><br><span class="line">  -webkit-<span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0.5</span>);</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.mri-hairline--top</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">border-top-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.mri-hairline--right</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">border-right-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>移动端</tag>
-        <tag>css</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>移动端适配多个分辨率不同的设备</title>
     <url>/2021/08/26/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E5%A4%9A%E4%B8%AA%E5%88%86%E8%BE%A8%E7%8E%87%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AE%BE%E5%A4%87/</url>
     <content><![CDATA[<div class="toc">
@@ -1431,12 +1632,6 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#1px-deng-yu-duo-shao-she-bei-wu-li-xiang-su">1px 等于多少设备物理像素</a></li>
-<li><a href="#viewport">viewport</a></li>
-<li><a href="#cha-xun-she-bei-kuan-du-px">查询设备宽度(px)</a></li>
-<li><a href="#clientwidth-offsetwidth-deng">clientWidth,offsetWidth 等</a></li>
-<li><a href="#px-zi-dong-zhuan-rem-gong-ju">px 自动转 rem 工具</a></li>
-<li><a href="#vw-shi-xian-dong-tai-font-size">vw 实现动态 font-size</a></li>
 <li><a href="#yi-dong-duan-gua-pei-duo-ge-fen-bian-lu-bu-tong-de-she-bei">移动端适配多个分辨率不同的设备</a><ul>
 <li><a href="#fang-an">方案</a><ul>
 <li><a href="#wang-yi-fang-an">网易方案</a></li>
@@ -1445,23 +1640,31 @@
 </li>
 </ul>
 </li>
+<li><a href="#xiang-guan">相关</a><ul>
+<li><a href="#1px-deng-yu-duo-shao-she-bei-wu-li-xiang-su">1px 等于多少设备物理像素</a></li>
+<li><a href="#viewport">viewport</a></li>
+<li><a href="#cha-xun-she-bei-kuan-du-px">查询设备宽度(px)</a></li>
+<li><a href="#clientwidth-offsetwidth-deng">clientWidth,offsetWidth 等</a></li>
+<li><a href="#px-zi-dong-zhuan-rem-gong-ju">px 自动转 rem 工具</a></li>
+<li><a href="#vw-shi-xian-dong-tai-font-size">vw 实现动态 font-size</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 </div>
 
-<h1><a href="#1px-deng-yu-duo-shao-she-bei-wu-li-xiang-su" class="header-anchor">#</a><span id="1px-deng-yu-duo-shao-she-bei-wu-li-xiang-su">1px 等于多少设备物理像素</span></h1><p>不同分辨率设备下 1px 代表的设备物理像素不同（一般 px 是 2 倍物理像素，设计图）<br>window.devicePixelRatio<br>用户缩放也会影响，放大 1 倍，代表的物理像素也放大 1 倍</p>
-<h1><a href="#viewport" class="header-anchor">#</a><span id="viewport">viewport</span></h1><p><a href="https://www.runoob.com/w3cnote/viewport-deep-understanding.html">我们常说的 viewport 是 layout viewport</a><br>移动端: 一般都是 980px<br>这个 layout viewport 的宽度可以通过 document.documentElement.clientWidth 来获取</p>
-<h1><a href="#cha-xun-she-bei-kuan-du-px" class="header-anchor">#</a><span id="cha-xun-she-bei-kuan-du-px">查询设备宽度(px)</span></h1><p>常用的直接 F12 看模拟调试的移动设备即可<br><a href="https://viewportsizes.com/#footer">https://viewportsizes.com/#footer</a></p>
-<h1><a href="#clientwidth-offsetwidth-deng" class="header-anchor">#</a><span id="clientwidth-offsetwidth-deng">clientWidth,offsetWidth 等</span></h1><p><a href="https://segmentfault.com/a/1190000017254887">https://segmentfault.com/a/1190000017254887</a></p>
-<h1><a href="#px-zi-dong-zhuan-rem-gong-ju" class="header-anchor">#</a><span id="px-zi-dong-zhuan-rem-gong-ju">px 自动转 rem 工具</span></h1><p>px2rem：<a href="https://www.npmjs.com/package/px2rem">https://www.npmjs.com/package/px2rem</a></p>
-<h1><a href="#vw-shi-xian-dong-tai-font-size" class="header-anchor">#</a><span id="vw-shi-xian-dong-tai-font-size">vw 实现动态 font-size</span></h1><p><a href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Responsive_Design">https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Responsive_Design</a></p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="comment">/* 固定值+vw */</span></span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">calc</span>(<span class="number">1.5rem</span> + <span class="number">3vw</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h1><a href="#yi-dong-duan-gua-pei-duo-ge-fen-bian-lu-bu-tong-de-she-bei" class="header-anchor">#</a><span id="yi-dong-duan-gua-pei-duo-ge-fen-bian-lu-bu-tong-de-she-bei">移动端适配多个分辨率不同的设备</span></h1><h2><a href="#fang-an" class="header-anchor">#</a><span id="fang-an">方案</span></h2><p><a href="https://www.cnblogs.com/zjzhang/p/6885790.html">https://www.cnblogs.com/zjzhang/p/6885790.html</a></p>
 <h3><a href="#wang-yi-fang-an" class="header-anchor">#</a><span id="wang-yi-fang-an">网易方案</span></h3><p>没有动态计算缩放比例，效果是：<code>内容比例是对的，但内容大小不对</code></p>
 <h3><a href="#amfe-flexible-tui-jian" class="header-anchor">#</a><span id="amfe-flexible-tui-jian">amfe-flexible （推荐）</span></h3><p><a href="https://github.com/amfe/lib-flexible">amfe-flexible</a><br>原理：<a href="https://juejin.cn/post/6844903833697517576">https://juejin.cn/post/6844903833697517576</a></p>
 <h4><a href="#xiang-bi-wang-yi-fang-an" class="header-anchor">#</a><span id="xiang-bi-wang-yi-fang-an">相比网易方案</span></h4><p>viewport 没有限制缩放的同时，设置<code>&lt;body&gt;</code>默认 fontSize = 12*dpr + ‘px’, 达到 <strong>rem 部分随着 clientWidth 缩放，其他部分正常显示</strong> 的效果<br>网易方案少了这一步，其 body fontSize 同 html fontSize，所以其他部分都变大了</p>
+<h1><a href="#xiang-guan" class="header-anchor">#</a><span id="xiang-guan">相关</span></h1><h2><a href="#1px-deng-yu-duo-shao-she-bei-wu-li-xiang-su" class="header-anchor">#</a><span id="1px-deng-yu-duo-shao-she-bei-wu-li-xiang-su">1px 等于多少设备物理像素</span></h2><p>不同分辨率设备下 1px 代表的设备物理像素不同（一般 px 是 2 倍物理像素，设计图）<br>window.devicePixelRatio<br>用户缩放也会影响，放大 1 倍，代表的物理像素也放大 1 倍</p>
+<h2><a href="#viewport" class="header-anchor">#</a><span id="viewport">viewport</span></h2><p><a href="https://www.runoob.com/w3cnote/viewport-deep-understanding.html">我们常说的 viewport 是 layout viewport</a><br>移动端: 一般都是 980px<br>这个 layout viewport 的宽度可以通过 document.documentElement.clientWidth 来获取</p>
+<h2><a href="#cha-xun-she-bei-kuan-du-px" class="header-anchor">#</a><span id="cha-xun-she-bei-kuan-du-px">查询设备宽度(px)</span></h2><p>常用的直接 F12 看模拟调试的移动设备即可<br><a href="https://viewportsizes.com/#footer">https://viewportsizes.com/#footer</a></p>
+<h2><a href="#clientwidth-offsetwidth-deng" class="header-anchor">#</a><span id="clientwidth-offsetwidth-deng">clientWidth,offsetWidth 等</span></h2><p><a href="https://segmentfault.com/a/1190000017254887">https://segmentfault.com/a/1190000017254887</a></p>
+<h2><a href="#px-zi-dong-zhuan-rem-gong-ju" class="header-anchor">#</a><span id="px-zi-dong-zhuan-rem-gong-ju">px 自动转 rem 工具</span></h2><p>px2rem：<a href="https://www.npmjs.com/package/px2rem">https://www.npmjs.com/package/px2rem</a></p>
+<h2><a href="#vw-shi-xian-dong-tai-font-size" class="header-anchor">#</a><span id="vw-shi-xian-dong-tai-font-size">vw 实现动态 font-size</span></h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Responsive_Design">https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Responsive_Design</a></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="comment">/* 固定值+vw */</span></span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">calc</span>(<span class="number">1.5rem</span> + <span class="number">3vw</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>移动端</tag>
@@ -1494,32 +1697,6 @@
 ]]></content>
       <tags>
         <tag>网络运维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>跨域</title>
-    <url>/2021/08/27/%E8%B7%A8%E5%9F%9F/</url>
-    <content><![CDATA[<h1><a href="#jsonp" class="header-anchor">#</a><span id="jsonp">JSONP</span></h1><ul>
-<li>html</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://example.com/data.json&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Service</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">someCallback(responeObj);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Client</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Client 定义的函数要与 Service 的同名</span></span><br><span class="line"><span class="built_in">window</span>.someCallback = <span class="function"><span class="keyword">function</span> (<span class="params">responeObj</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2><a href="#jquery-you-chu-li-fang-an" class="header-anchor">#</a><span id="jquery-you-chu-li-fang-an">jQuery 有处理方案</span></h2><p><code>jQuery.getJSON(&quot;http://example.com/data.json?callback=?&quot;, function(result)&#123; // 处理返回结果的相关逻辑 &#125;);</code></p>
-<p>jQuery 将上面 URL 中最后的问号替换为一个由它创建的随机命名的临时函数。服务器 会获取这个 callback 参数，使用这个名字作为回调函数名称返回给客户端。</p>
-]]></content>
-      <tags>
-        <tag>网络运维</tag>
-        <tag>跨域</tag>
       </tags>
   </entry>
   <entry>
@@ -1572,6 +1749,32 @@
       </tags>
   </entry>
   <entry>
+    <title>跨域</title>
+    <url>/2021/08/27/%E8%B7%A8%E5%9F%9F/</url>
+    <content><![CDATA[<h1><a href="#jsonp" class="header-anchor">#</a><span id="jsonp">JSONP</span></h1><ul>
+<li>html</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://example.com/data.json&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Service</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">someCallback(responeObj);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Client</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Client 定义的函数要与 Service 的同名</span></span><br><span class="line"><span class="built_in">window</span>.someCallback = <span class="function"><span class="keyword">function</span> (<span class="params">responeObj</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2><a href="#jquery-you-chu-li-fang-an" class="header-anchor">#</a><span id="jquery-you-chu-li-fang-an">jQuery 有处理方案</span></h2><p><code>jQuery.getJSON(&quot;http://example.com/data.json?callback=?&quot;, function(result)&#123; // 处理返回结果的相关逻辑 &#125;);</code></p>
+<p>jQuery 将上面 URL 中最后的问号替换为一个由它创建的随机命名的临时函数。服务器 会获取这个 callback 参数，使用这个名字作为回调函数名称返回给客户端。</p>
+]]></content>
+      <tags>
+        <tag>网络运维</tag>
+        <tag>跨域</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>路由</title>
     <url>/2021/09/28/%E8%B7%AF%E7%94%B1/</url>
     <content><![CDATA[<div class="toc">
@@ -1620,8 +1823,8 @@
 <h3><a href="#fu-zhi-dao-dist-wen-jian-jia" class="header-anchor">#</a><span id="fu-zhi-dao-dist-wen-jian-jia">复制到 dist 文件夹</span></h3><p>images、<strong><em>库文件</em></strong>、压缩后的 css、js、html</p>
 ]]></content>
       <tags>
-        <tag>项目</tag>
         <tag>gulp</tag>
+        <tag>项目</tag>
       </tags>
   </entry>
   <entry>
@@ -1813,6 +2016,16 @@
 <!-- toc -->
 
 <ul>
+<li><a href="#0-5px">0.5px</a></li>
+<li><a href="#gua-pei-liu-hai-ping">适配刘海屏</a><ul>
+<li><a href="#viewport-fit">viewport-fit</a></li>
+<li><a href="#env-he-constant">env() 和 constant()</a></li>
+</ul>
+</li>
+<li><a href="#css3-dong-hua">css3 动画</a><ul>
+<li><a href="#animation">animation</a></li>
+</ul>
+</li>
 <li><a href="#js-css-gong-xiang-bian-liang">js css 共享变量</a></li>
 <li><a href="#css-luo-ji-shu-xing">css 逻辑属性</a><ul>
 <li><a href="#inline-he-block">-inline 和 -block</a></li>
@@ -1839,7 +2052,7 @@
 <li><a href="#xiang-ying-shi-bei-jing-tu">响应式-背景图</a></li>
 <li><a href="#she-bei-fen-bian-lu">设备分辨率</a></li>
 <li><a href="#ji-chu">基础</a></li>
-<li><a href="#css3-dong-hua">css3 动画</a></li>
+<li><a href="#css3-dong-hua-1">css3 动画</a></li>
 <li><a href="#css-sheng-cheng-qi">css 生成器</a></li>
 <li><a href="#dan-wei">单位</a></li>
 <li><a href="#you-xian-ji">优先级</a><ul>
@@ -1920,6 +2133,15 @@
 <!-- tocstop -->
 
 </div>
+
+<h1><a href="#0-5px" class="header-anchor">#</a><span id="0-5px">0.5px</span></h1><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 直接加 class 即可用 */</span></span><br><span class="line"><span class="selector-attr">[class*=<span class="string">&quot;mri-hairline&quot;</span>]</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[class*=<span class="string">&quot;mri-hairline&quot;</span>]</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">&quot; &quot;</span>;</span><br><span class="line">  <span class="attribute">pointer-events</span>: none;</span><br><span class="line">  <span class="attribute">top</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">right</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">0</span> solid <span class="number">#ddd</span>;</span><br><span class="line">  -webkit-<span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0.5</span>);</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0.5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.mri-hairline--top</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">border-top-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.mri-hairline--right</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">border-right-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#gua-pei-liu-hai-ping" class="header-anchor">#</a><span id="gua-pei-liu-hai-ping">适配刘海屏</span></h1><p><a href="https://www.freesion.com/article/4541835441/">https://www.freesion.com/article/4541835441/</a></p>
+<p><a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/">了解 safe-area</a></p>
+<h2><a href="#viewport-fit" class="header-anchor">#</a><span id="viewport-fit">viewport-fit</span></h2><h2><a href="#env-he-constant" class="header-anchor">#</a><span id="env-he-constant">env() 和 constant()</span></h2><p>CSS function</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* constant env 顺序不要改 */</span></span><br><span class="line"><span class="attribute">padding-bottom</span>: <span class="built_in">constant</span>(safe-area-inset-bottom); <span class="comment">/* 兼容 iOS &lt; 11.2 */</span></span><br><span class="line"><span class="attribute">padding-bottom</span>: <span class="built_in">env</span>(safe-area-inset-bottom); <span class="comment">/* 兼容 iOS &gt;= 11.2 */</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">padding-bottom</span>: <span class="number">20px</span>;</span><br><span class="line"><span class="attribute">padding-bottom</span>: <span class="built_in">calc</span>(<span class="built_in">constant</span>(safe-area-inset-bottom)+<span class="number">20px</span>);</span><br><span class="line"><span class="attribute">padding-bottom</span>: <span class="built_in">calc</span>(<span class="built_in">env</span>(safe-area-inset-bottom)+<span class="number">20px</span>);</span><br></pre></td></tr></table></figure>
+
+<h1><a href="#css3-dong-hua" class="header-anchor">#</a><span id="css3-dong-hua">css3 动画</span></h1><h2><a href="#animation" class="header-anchor">#</a><span id="animation">animation</span></h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">animation-name</span>: myfirst;</span><br><span class="line">  <span class="attribute">animation-duration</span>: <span class="number">5s</span>;</span><br><span class="line">  <span class="comment">/* 速度曲线 */</span></span><br><span class="line">  <span class="attribute">animation-timing-function</span>: linear;</span><br><span class="line">  <span class="attribute">animation-delay</span>: <span class="number">2s</span>;</span><br><span class="line">  <span class="comment">/* 播放的次数 */</span></span><br><span class="line">  <span class="attribute">animation-iteration-count</span>: infinite;</span><br><span class="line">  <span class="comment">/* 是否在下一周期逆向地播放 */</span></span><br><span class="line">  <span class="attribute">animation-direction</span>: alternate;</span><br><span class="line">  <span class="comment">/* 是否正在运行或暂停 */</span></span><br><span class="line">  <span class="attribute">animation-play-state</span>: running;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1><a href="#js-css-gong-xiang-bian-liang" class="header-anchor">#</a><span id="js-css-gong-xiang-bian-liang">js css 共享变量</span></h1><p><a href="https://segmentfault.com/a/1190000018795983?utm_source=tag-newest">https://segmentfault.com/a/1190000018795983?utm_source=tag-newest</a><br><a href="https://www.npmjs.com/package/sass-resources-loader">https://www.npmjs.com/package/sass-resources-loader</a></p>
 <h1><a href="#css-luo-ji-shu-xing" class="header-anchor">#</a><span id="css-luo-ji-shu-xing">css 逻辑属性</span></h1><h2><a href="#inline-he-block" class="header-anchor">#</a><span id="inline-he-block">-inline 和 -block</span></h2><p>margin/padding/border-inline/block</p>
