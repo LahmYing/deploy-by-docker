@@ -5,6 +5,7 @@
 # RUN apk add --no-cache --update nodejs nodejs-npm
 
 # FROM node:alpine
+
 FROM node:slim
 
 # ENV NODE_ENV=production
@@ -24,16 +25,14 @@ WORKDIR ${WORK_DIR}
 
 RUN node --version && npm --version && yarn --version
 
-# COPY ["package.json", "package-lock.json*", "yarn.lock", "./"]
 COPY ./ ./
 
-# Install PM2 globally
-# RUN npm i yarn && yarn global add pm2
-RUN npm config set registry https://registry.npm.taobao.org && npm i pm2 -g
+# PM2: 服务持久运行工具
+RUN yarn global add pm2
+RUN yarn && yarn compress
 
-# Install dependencies
-# RUN yarn && yarn compress
-RUN npm install && npm run compress
+# RUN npm config set registry https://registry.npm.taobao.org && npm i pm2 -g
+# RUN npm install && npm run compress
 
 # 校正时间
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
