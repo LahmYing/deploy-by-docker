@@ -1,12 +1,11 @@
 # FROM node
 
-# 使用基础版本的 Alpine 镜像，自己安装Nodejs
-# FROM alpine:latest
-# RUN apk add --no-cache --update nodejs nodejs-npm
+# 使用基础版本的 Alpine 镜像
+FROM alpine:3.14 as CHUNK_ONE
+# 安装 nodejs 和 yarn
+RUN apk add --no-cache --update nodejs=14.17.4-r0 yarn=1.22.10-r0
 
-# FROM node:alpine
-
-FROM node:slim
+# FROM node:slim
 
 # 工作区文件夹，非该项目所在文件夹
 ENV WORK_DIR=/usr/app/blog
@@ -22,7 +21,12 @@ WORKDIR ${WORK_DIR}
 
 RUN node --version && npm --version && yarn --version
 
-COPY ./ ./
+COPY package.json yarn.lock ./
+# COPY ./ ./
+RUN yarn
+
+FROM CHUNK_ONE
+COPY --from=CHUNK_ONE ${WORK_DIR}/node_modules ./node_modules
 
 # PM2: 服务持久运行工具
 RUN yarn global add pm2
@@ -35,7 +39,7 @@ RUN yarn && yarn compress
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # Copy all files
-COPY ./ ./
+COPY . .
 
 # Expose the listening port
 EXPOSE 80
