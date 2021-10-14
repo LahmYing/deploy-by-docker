@@ -1,11 +1,12 @@
-# FROM node
+# # 使用基础版本的 Alpine 镜像
+# FROM alpine:3.14 as CHUNK_ONE
+# RUN sed -i 's/https/http/' /etc/apk/repositories
+# RUN apk add curl
+# # 安装 nodejs 和 yarn
+# # alpine 版本可用的 node.js 和 yarn： https://pkgs.alpinelinux.org/packages?name=yarn&branch=v3.14
+# RUN apk add --no-cache --update nodejs=14.17.4-r0 yarn=1.22.10-r0
 
-# 使用基础版本的 Alpine 镜像
-FROM alpine:3.14 as CHUNK_ONE
-# 安装 nodejs 和 yarn
-RUN apk add --no-cache --update nodejs=14.17.4-r0 yarn=1.22.10-r0
-
-# FROM node:slim
+FROM node:slim as CHUNK_ONE
 
 # 工作区文件夹，非该项目所在文件夹
 ENV WORK_DIR=/usr/app/blog
