@@ -1,45 +1,26 @@
-# FROM node
-
-# 使用基础版本的 Alpine 镜像，自己安装Nodejs
-# FROM alpine:latest
-# RUN apk add --no-cache --update nodejs nodejs-npm
-
-# FROM node:alpine
-
-FROM node:slim
-
-# ENV NODE_ENV=production
-# ENV NODE_VERSION 14.17.3
-
+FROM node:slim as builder
 # 工作区文件夹，非该项目所在文件夹
 ENV WORK_DIR=/usr/app/blog
-
 # 执行命令，创建文件夹
 RUN mkdir -p ${WORK_DIR}
 RUN chmod -R 777 ${WORK_DIR}
 RUN mkdir -p ${WORK_DIR}/logs
 RUN chmod -R 777 ${WORK_DIR}/logs
-
 # Set working directory
 WORKDIR ${WORK_DIR}
-
 RUN node --version && npm --version && yarn --version
-
-COPY ./ ./
-
+COPY ["package.json", "package-lock.json*", "yarn.lock"]
 # PM2: 服务持久运行工具
-RUN yarn global add pm2
-RUN yarn && yarn compress
+RUN yarn global add pm2 && yarn
+# RUN npm config set registry https://registry.npm.taobao.org && npm i pm2 -g && npm install
 
-# RUN npm config set registry https://registry.npm.taobao.org && npm i pm2 -g
-# RUN npm install && npm run compress
-
-# 校正时间
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
+FROM node:slim
+COPY --from=builder ${WORK_DIR}/node_modules ./node_modules
+RUN yarn compress
 # Copy all files
 COPY ./ ./
-
+# 校正时间
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # Expose the listening port
 EXPOSE 80
 
