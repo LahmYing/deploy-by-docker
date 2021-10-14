@@ -27,11 +27,12 @@ RUN node --version && npm --version && yarn --version
 COPY ./ ./
 
 # Install PM2 globally
-RUN npm i yarn && yarn global add pm2
+# RUN npm i yarn && yarn global add pm2
+RUN npm i pm2 -g
 
 # Install dependencies
-# RUN yarn
-RUN yarn && yarn compress
+# RUN yarn && yarn compress
+RUN npm install && npm run compress
 
 # 校正时间
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
