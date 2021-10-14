@@ -31,7 +31,6 @@ COPY --from=CHUNK_ONE ${WORK_DIR}/node_modules ./node_modules
 
 # PM2: 服务持久运行工具
 RUN yarn global add pm2
-RUN yarn && yarn compress
 
 # RUN npm config set registry https://registry.npm.taobao.org && npm i pm2 -g
 # RUN npm install && npm run compress
@@ -41,6 +40,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # Copy all files
 COPY . .
+RUN yarn compress
 
 # Expose the listening port
 EXPOSE 80
