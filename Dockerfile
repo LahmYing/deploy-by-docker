@@ -1,10 +1,11 @@
 # FROM node
 
 # 使用基础版本的 Alpine 镜像，自己安装Nodejs
-FROM alpine:latest
-RUN apk add --no-cache --update nodejs nodejs-npm
+# FROM alpine:latest
+# RUN apk add --no-cache --update nodejs nodejs-npm
 
 # FROM node:alpine
+FROM node:slim
 
 # ENV NODE_ENV=production
 # ENV NODE_VERSION 14.17.3
@@ -28,7 +29,7 @@ COPY ./ ./
 
 # Install PM2 globally
 # RUN npm i yarn && yarn global add pm2
-RUN npm i pm2 -g
+RUN npm config set registry https://registry.npm.taobao.org && npm i pm2 -g
 
 # Install dependencies
 # RUN yarn && yarn compress
