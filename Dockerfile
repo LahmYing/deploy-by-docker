@@ -10,13 +10,13 @@ RUN chmod -R 777 ${WORK_DIR}/logs
 WORKDIR ${WORK_DIR}
 RUN node --version && npm --version && yarn --version
 COPY ["package.json", "package-lock.json*", "yarn.lock"]
-# PM2: 服务持久运行工具
-RUN yarn global add pm2 && yarn
+RUN yarn
 # RUN npm config set registry https://registry.npm.taobao.org && npm i pm2 -g && npm install
 
 FROM node:slim
+ENV WORK_DIR=/usr/app/blog
 COPY --from=builder ${WORK_DIR}/node_modules ./node_modules
-RUN yarn compress
+RUN yarn compress && yarn global add pm2
 # Copy all files
 COPY ./ ./
 # 校正时间
