@@ -16,9 +16,9 @@ RUN yarn
 FROM node:slim
 ENV WORK_DIR=/usr/app/blog
 COPY --from=builder ${WORK_DIR}/node_modules ./node_modules
-RUN yarn compress && yarn global add pm2
 # Copy all files
 COPY ./ ./
+RUN yarn compress && yarn global add pm2
 # 校正时间
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # Expose the listening port
