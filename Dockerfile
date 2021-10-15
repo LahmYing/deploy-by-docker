@@ -43,7 +43,7 @@ COPY . .
 RUN yarn compress
 
 # Expose the listening port
-EXPOSE 80
+# EXPOSE 80
 
 # 列出所有文件和文件夹，包括隐藏目录
 # cntofu.com/book/139/index.html
