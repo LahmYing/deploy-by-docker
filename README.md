@@ -4,11 +4,11 @@
 
 # 项目地址
 
-http://lahmying.top/blog
+http://lahmying.top/blog/archives
 
 # 建站流程
 
-http://lahmying.top/blog/2021/09/17/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99%E7%9B%B8%E5%85%B3/
+<!-- http://lahmying.top/blog/2021/09/17/%E4%B8%AA%E4%BA%BA%E5%BB%BA%E7%AB%99%E7%9B%B8%E5%85%B3/ -->
 
 # 部署
 

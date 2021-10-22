@@ -17,7 +17,7 @@ app.use(
   })
 );
 
-router.get("/", async (ctx) => {
+router.get("/blog", async (ctx) => {
   // 加载 views/index.ejs
   await ctx.render("index");
 });
