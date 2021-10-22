@@ -17,7 +17,7 @@ app.use(
   })
 );
 
-router.prefix('/blog')
+// router.prefix('/blog')
 
 router.get("/", async (ctx) => {
   await ctx.render("index");

@@ -4,7 +4,7 @@
 
 # 项目地址
 
-http://lahmying.top/blog/archives
+http://lahmying.top/archives
 
 # 建站流程
 
