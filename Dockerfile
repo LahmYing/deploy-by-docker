@@ -49,6 +49,6 @@ RUN yarn compress
 # cntofu.com/book/139/index.html
 # https://zhuanlan.zhihu.com/p/57390458
 # 等同 RUN ls -a -l -R -I "node_modules*"
-RUN ls -alR -I "node_modules*"
+# RUN ls -alR -I "node_modules*"
 
 CMD ["pm2-runtime", "start", "--raw", "app.js", "--env", "production"]
