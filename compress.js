@@ -93,15 +93,11 @@ let compressImage = (filePath) => {
   imagemin([filePath], {
     // 目标文件夹
     destination: destination,
-    plugins: [
-      imageminJpegtran(),
-      imageminPngquant({
-        quality: [0.6, 0.8],
-      }),
-    ],
-  }).then((result) => {
-    // 直接替换
-    /** 
+    plugins: [imageminJpegtran(), imageminPngquant()],
+  })
+    .then((result) => {
+      // 直接替换
+      /** 
       fs.unlink(filePath, (err) => {
         if (err) {
           // throw err;
@@ -112,20 +108,16 @@ let compressImage = (filePath) => {
         }
       });
       */
-    // image = result;
-    console.log(`compressImage = ${filePath}`);
-  });
-  // .catch((error) => { // imagemin 这插件不会报错，不会运行至此
-  //   console.log(`error compressImage = ${filePath}`);
-  // });
+      // image = result;
+      console.log(`compressImage = ${filePath}`);
+    })
+    .catch(() => {
+      console.log(`error compressImage = ${filePath}`);
+    });
 };
 
 let compressJs = (filePath) => {
-  fs.writeFileSync(
-    filePath,
-    UglifyJS.minify(fs.readFileSync(filePath, "utf8")).code,
-    "utf8"
-  );
+  fs.writeFileSync(filePath, UglifyJS.minify(fs.readFileSync(filePath, "utf8")).code, "utf8");
   console.log(`compressJs = ${filePath}`);
 };
 
